@@ -4,7 +4,7 @@ A modern, dark-themed personal portfolio showcasing my work as a Data Scientist 
 
 ## 🌐 Live Demo
 
-**[View Portfolio →] ([(https://lingesh-dev-portfolio.netlify.app)])**
+**[View Portfolio →](https://lingesh-dev-portfolio.netlify.app)**
 
 ## 📋 About
 
