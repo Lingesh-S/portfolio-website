@@ -1323,7 +1323,10 @@
     <footer>
         <div class="container">
             <p>Designed & Built by <span class="footer-gradient">Lingesh S</span></p>
-            <p>© 2025 All rights reserved</p>
+            <p>© <span id="year"></span> All rights reserved</p>
+            <script>
+              document.getElementById("year").textContent = new Date().getFullYear();
+            </script>
         </div>
     </footer>
 
