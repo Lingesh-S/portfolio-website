@@ -1,0 +1,3 @@
+# Serve the new portfolio. The original site is still in the repo root.
+[build]
+  publish = "portfolio-v2"
