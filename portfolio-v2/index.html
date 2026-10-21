@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lingesh S | Data Scientist · ML, GenAI &amp; RAG Systems</title>
+    <meta name="description" content="Portfolio of Lingesh S, a Data Scientist building production-grade ML and GenAI systems: XBRL auto-tagging with LSTM + NER, RAG architectures and LLM-powered enterprise features.">
+    <meta name="author" content="Lingesh S">
+    <meta name="theme-color" content="#07080d">
+    <meta name="color-scheme" content="dark light">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Lingesh S | Data Scientist · ML, GenAI & RAG">
+    <meta property="og:description" content="Production-grade ML and GenAI systems: XBRL auto-tagging, RAG architectures and LLM-powered enterprise features.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lingesh S | Data Scientist · ML, GenAI & RAG">
+    <meta name="twitter:description" content="Production-grade ML and GenAI systems: XBRL auto-tagging, RAG architectures and LLM-powered enterprise features.">
+
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500;600&display=swap">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <!-- Apply the saved theme before first paint so there is no flash -->
+    <script>
+        (function () {
+            var d = document.documentElement;
+            d.classList.add('js');
+            // If main.js never runs, un-hide the scroll-reveal content
+            setTimeout(function () { if (!d.classList.contains('js-ready')) d.classList.remove('js'); }, 3000);
+            try {
+                var t = localStorage.getItem('theme');
+                if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+            } catch (e) {}
+        })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Lingesh S",
+        "jobTitle": "Data Scientist",
+        "worksFor": { "@type": "Organization", "name": "DataTracks" },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Sathyabama University" },
+        "email": "mailto:lingeshsrinivasan1@gmail.com",
+        "sameAs": [
+            "https://github.com/Lingesh-S",
+            "https://www.linkedin.com/in/lingesh-s29"
+        ],
+        "knowsAbout": ["Machine Learning", "Generative AI", "Retrieval-Augmented Generation", "NLP", "LSTM", "Named Entity Recognition", "XBRL"]
+    }
+    </script>
+
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/previews.js" defer></script>
+    <script src="assets/js/ask.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Icon sprite -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+        <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+        <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+        <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+        <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></symbol>
+        <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+        <symbol id="i-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></symbol>
+        <symbol id="i-arrow-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></symbol>
+        <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+        <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5 12.9 9l5.6 1.9-5.6 1.9L11 18.3l-1.9-5.5-5.6-1.9L9.1 9z"/><path d="M19 3v4M17 5h4M19.5 16v3M18 17.5h3"/></symbol>
+        <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+        <symbol id="i-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+        <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+        <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="8" rx="2"/><rect x="2" y="13" width="20" height="8" rx="2"/><path d="M6 7h.01M6 17h.01"/></symbol>
+        <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></symbol>
+        <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+        <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></symbol>
+        <symbol id="i-grad" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-7"/></symbol>
+        <symbol id="i-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="3"/><path d="M12 8V4H8"/><path d="M9 13v2M15 13v2"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+        <symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+        <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+        <symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+        <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+        <symbol id="i-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5v14M15 5v14"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 4 13 8-13 8z"/></symbol>
+        <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+        <symbol id="i-message" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+        <symbol id="i-hf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 14.5a4 4 0 0 0 7 0"/><path d="M9 10h.01M15 10h.01"/></symbol>
+    </svg>
+
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+    <!-- Navigation -->
+    <header class="site-header" id="navbar">
+        <nav class="nav container" aria-label="Primary">
+            <a href="#home" class="logo" aria-label="Lingesh S, back to top">
+                <span class="logo-mark" aria-hidden="true">LS</span>
+                <span class="logo-text">&lt;Lingesh S /&gt;</span>
+            </a>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="icon-btn ask-open" type="button" aria-label="Ask my portfolio" aria-haspopup="dialog" aria-controls="ask-dialog">
+                    <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
+                </button>
+                <button class="icon-btn theme-toggle" type="button" aria-label="Switch to light theme">
+                    <svg class="icon icon-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+                    <svg class="icon icon-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+                </button>
+                <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                    <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+                    <svg class="icon icon-close" aria-hidden="true"><use href="#i-close"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main">
+        <!-- Hero -->
+        <section id="home" class="hero" aria-labelledby="hero-title">
+            <canvas class="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-bg" aria-hidden="true"></div>
+
+            <div class="container hero-grid">
+                <div class="hero-copy">
+                    <a class="status-pill" href="#experience" data-reveal>
+                        <span class="pulse-dot" aria-hidden="true"></span>
+                        Currently Data Scientist @ DataTracks
+                        <svg class="icon icon-xs" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                    </a>
+
+                    <h1 id="hero-title" class="hero-title" data-reveal style="--d:1">
+                        Hi, I'm <span class="grad-text">Lingesh S</span>
+                    </h1>
+
+                    <p class="hero-role mono" data-reveal style="--d:2">
+                        <span aria-hidden="true">// </span><span class="sr-only">Data Scientist</span><span class="typed" aria-hidden="true">Data Scientist</span><span class="caret" aria-hidden="true"></span>
+                    </p>
+
+                    <p class="hero-lede" data-reveal style="--d:3">
+                        Building production-grade ML and GenAI systems. Specializing in
+                        <strong>XBRL auto-tagging</strong>, <strong>RAG architectures</strong>, and
+                        <strong>LLM-powered enterprise solutions</strong>.
+                    </p>
+
+                    <div class="hero-cta" data-reveal style="--d:4">
+                        <a href="#projects" class="btn btn-primary btn-lg">
+                            <svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>
+                            View Projects
+                        </a>
+                        <a href="Lingesh_Resume.pdf" class="btn btn-ghost btn-lg" download="Lingesh_S_Resume.pdf">
+                            <svg class="icon" aria-hidden="true"><use href="#i-download"/></svg>
+                            Download Resume
+                        </a>
+                    </div>
+
+                    <ul class="socials" data-reveal style="--d:5" aria-label="Social links">
+                        <li><a href="https://github.com/Lingesh-S" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+                        <li><a href="https://www.linkedin.com/in/lingesh-s29" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+                        <li><a href="mailto:lingeshsrinivasan1@gmail.com" aria-label="Email lingeshsrinivasan1@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a></li>
+                        <li><a href="tel:+917299307308" aria-label="Call +91 72993 07308"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a></li>
+                        <li class="socials-ask">
+                            <button class="ask-inline ask-open" type="button" aria-haspopup="dialog" aria-controls="ask-dialog">
+                                <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+                                Ask my portfolio
+                                <kbd class="kbd-shortcut">Ctrl K</kbd>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="hero-visual" data-reveal style="--d:3">
+                    <div class="ide" role="img" aria-label="Code editor showing a Python class DataScientist with name Lingesh S, role Data Scientist and expertise in Machine Learning, GenAI and RAG, NLP and Transformers">
+                        <div class="ide-bar" aria-hidden="true">
+                            <span class="dots"><i></i><i></i><i></i></span>
+                            <span class="ide-tab is-active">data_scientist.py</span>
+                            <span class="ide-tab">rag_pipeline.py</span>
+                        </div>
+<pre class="ide-code" aria-hidden="true"><code><span class="ln" style="--i:0"><span class="tk-kw">from</span> sklearn.model_selection <span class="tk-kw">import</span> train_test_split</span><span class="ln" style="--i:1"><span class="tk-kw">from</span> transformers <span class="tk-kw">import</span> AutoModel, AutoTokenizer</span><span class="ln" style="--i:2"><span class="tk-kw">import</span> torch</span><span class="ln" style="--i:3"> </span><span class="ln" style="--i:4"><span class="tk-kw">class</span> <span class="tk-cls">DataScientist</span>:</span><span class="ln" style="--i:5">    <span class="tk-kw">def</span> <span class="tk-fn">__init__</span>(<span class="tk-self">self</span>):</span><span class="ln" style="--i:6">        <span class="tk-self">self</span>.name = <span class="tk-str">"Lingesh S"</span></span><span class="ln" style="--i:7">        <span class="tk-self">self</span>.role = <span class="tk-str">"Data Scientist"</span></span><span class="ln" style="--i:8">        <span class="tk-self">self</span>.expertise = [</span><span class="ln" style="--i:9">            <span class="tk-str">"Machine Learning"</span>,</span><span class="ln" style="--i:10">            <span class="tk-str">"GenAI &amp; RAG"</span>,</span><span class="ln" style="--i:11">            <span class="tk-str">"NLP &amp; Transformers"</span></span><span class="ln" style="--i:12">        ]</span></code></pre>
+                        <div class="ide-terminal" aria-hidden="true">
+                            <span class="tm-line" style="--i:14"><span class="tm-prompt">&gt;&gt;&gt;</span> me = DataScientist()</span>
+                            <span class="tm-line" style="--i:15"><span class="tm-prompt">&gt;&gt;&gt;</span> me.expertise</span>
+                            <span class="tm-line tm-out" style="--i:16">['Machine Learning', 'GenAI &amp; RAG', 'NLP &amp; Transformers']</span>
+                        </div>
+                    </div>
+
+                    <div class="float-chip float-chip-1" aria-hidden="true"><svg class="icon icon-xs"><use href="#i-cpu"/></svg> LSTM + NER · XBRL</div>
+                    <div class="float-chip float-chip-2" aria-hidden="true"><svg class="icon icon-xs"><use href="#i-database"/></svg> RAG · Haystack</div>
+                    <div class="float-chip float-chip-3" aria-hidden="true"><svg class="icon icon-xs"><use href="#i-activity"/></svg> FastAPI · Grafana</div>
+                </div>
+            </div>
+
+            <div class="container">
+                <dl class="stats" data-reveal style="--d:6">
+                    <div class="stat">
+                        <dt>Industry roles in ML &amp; GenAI</dt>
+                        <dd><span data-count="3">3</span></dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Taxonomy pipelines shipped end-to-end</dt>
+                        <dd><span data-count="2">2</span></dd>
+                    </div>
+                    <div class="stat">
+                        <dt>International publication (ICCCAI-2024)</dt>
+                        <dd><span data-count="1">1</span></dd>
+                    </div>
+                    <div class="stat">
+                        <dt>Job-match accuracy in published research</dt>
+                        <dd>&gt;<span data-count="80">80</span>%</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="marquee" data-reveal style="--d:7">
+                <button class="marquee-toggle" type="button" aria-label="Pause tech stack animation">
+                    <svg class="icon icon-xs icon-pause" aria-hidden="true"><use href="#i-pause"/></svg>
+                    <svg class="icon icon-xs icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+                </button>
+                <div class="marquee-viewport">
+                    <div class="marquee-track">
+                        <ul aria-label="Tech stack">
+                            <li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Transformers</li><li>LangChain</li><li>LangGraph</li><li>Haystack</li><li>AWS Bedrock</li><li>ChromaDB</li><li>FAISS</li><li>FastAPI</li><li>RabbitMQ</li><li>Docker</li><li>Grafana</li><li>Prometheus</li><li>Scikit-learn</li><li>spaCy</li><li>PySpark</li><li>Kafka</li><li>Streamlit</li>
+                        </ul>
+                        <ul aria-hidden="true">
+                            <li>Python</li><li>PyTorch</li><li>TensorFlow</li><li>Transformers</li><li>LangChain</li><li>LangGraph</li><li>Haystack</li><li>AWS Bedrock</li><li>ChromaDB</li><li>FAISS</li><li>FastAPI</li><li>RabbitMQ</li><li>Docker</li><li>Grafana</li><li>Prometheus</li><li>Scikit-learn</li><li>spaCy</li><li>PySpark</li><li>Kafka</li><li>Streamlit</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="section" aria-labelledby="about-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">01</span> About me</p>
+                    <h2 id="about-title" class="section-title">Building intelligent systems that <em>make a difference</em></h2>
+                </header>
+
+                <div class="about-grid">
+                    <div class="card about-card" data-reveal>
+                        <p data-kb data-kb-title="About: role and focus">I'm a <span class="hl">Data Scientist</span> working at a product-based company, building and deploying <span class="hl">production-grade ML and GenAI systems</span> used in real enterprise workflows. My work focuses on turning complex AI models into <span class="hl">reliable, scalable features</span> that solve concrete business problems.</p>
+                        <p data-kb data-kb-title="About: XBRL auto-tagging at DataTracks">At <span class="hl">DataTracks</span>, I work on <span class="hl">XBRL auto-tagging systems using LSTM and NER models</span>, and design taxonomy-specific ML pipelines across multiple regulatory domains. I've trained and deployed models for newly introduced taxonomies and maintain independent pipelines to support region-specific requirements.</p>
+                        <p data-kb data-kb-title="About: real-time RAG systems">I've also built <span class="hl">RAG-based systems for real-time applications</span>, including LLM-powered features inside a Word-like editor. These systems are designed for <span class="hl">low-latency inference</span> and production monitoring, using tools like <span class="hl">FastAPI, Haystack, RabbitMQ, Grafana, and Prometheus</span>.</p>
+                        <p data-kb data-kb-title="About: research and GenAI tooling">My research work has been <span class="hl">published at international conferences</span>, and I actively experiment with modern GenAI tooling such as <span class="hl">LangChain</span> and retrieval systems to improve how large language models are used in enterprise products.</p>
+                    </div>
+
+                    <ul class="focus-grid" aria-label="Focus areas">
+                        <li class="card focus-card" data-reveal style="--d:1">
+                            <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-cpu"/></svg></span>
+                            <h3>Production ML</h3>
+                            <p>LSTM + NER auto-tagging across region-specific XBRL taxonomies.</p>
+                        </li>
+                        <li class="card focus-card" data-reveal style="--d:2">
+                            <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-sparkles"/></svg></span>
+                            <h3>GenAI &amp; RAG</h3>
+                            <p>Retrieval systems with Haystack, LangChain, ChromaDB and FAISS.</p>
+                        </li>
+                        <li class="card focus-card" data-reveal style="--d:3">
+                            <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-server"/></svg></span>
+                            <h3>Serving &amp; observability</h3>
+                            <p>FastAPI, RabbitMQ and Docker services, watched with Grafana &amp; Prometheus.</p>
+                        </li>
+                        <li class="card focus-card" data-reveal style="--d:4">
+                            <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-book"/></svg></span>
+                            <h3>Research</h3>
+                            <p>Published at ICCCAI-2024 with Taylor's University, Malaysia.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section section-alt" aria-labelledby="experience-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">02</span> Work experience</p>
+                    <h2 id="experience-title" class="section-title">Professional journey building <em>ML &amp; AI solutions</em></h2>
+                </header>
+
+                <ol class="timeline">
+                    <li class="tl-item" id="exp-datatracks" data-reveal data-kb data-kb-title="Experience: Data Scientist at DataTracks (current)" data-title="Data Scientist · DataTracks" data-skills="Python|LSTM|NER|Haystack|RAG Systems|FastAPI|REST APIs|RabbitMQ|Docker|Grafana|Prometheus">
+                        <span class="tl-marker is-current" aria-hidden="true"></span>
+                        <article class="card tl-card">
+                            <header class="tl-head">
+                                <div>
+                                    <h3 class="tl-role">Data Scientist</h3>
+                                    <p class="tl-company">DataTracks <span class="pill pill-live"><span class="pulse-dot" aria-hidden="true"></span>Current</span></p>
+                                </div>
+                                <p class="tl-date mono">July 2025 – Present</p>
+                            </header>
+                            <ul class="tl-points">
+                                <li>Built and maintained <strong>LSTM + NER-based XBRL auto-tagging models</strong> for multiple region-specific taxonomies across core compliance products</li>
+                                <li>Designed <strong>independent ML pipelines per taxonomy</strong>, and trained &amp; deployed two new taxonomy pipelines end-to-end (data prep → training → production integration)</li>
+                                <li>Developed a <strong>RAG-based next-word prediction system</strong> for a Word-like editor in a flagship product using Haystack, FastAPI and RabbitMQ</li>
+                                <li>Implemented <strong>production monitoring and observability</strong> for ML services using Grafana and Prometheus</li>
+                                <li>Deployed and managed <strong>ML services in production</strong> (on-premise infrastructure) using Docker, FastAPI and REST APIs, ensuring scalable model serving, low-latency inference and reliable system performance</li>
+                            </ul>
+                            <ul class="chips" aria-label="Technologies">
+                                <li class="chip">LSTM</li><li class="chip">NER</li><li class="chip">XBRL</li><li class="chip">Haystack</li><li class="chip">FastAPI</li><li class="chip">RabbitMQ</li><li class="chip">Docker</li><li class="chip">Grafana</li><li class="chip">Prometheus</li>
+                            </ul>
+                        </article>
+                    </li>
+
+                    <li class="tl-item" id="exp-dtyle" data-reveal data-kb data-kb-title="Experience: LLM Intern at Dtyle.AI (IIT Madras incubated)" data-title="LLM Intern · Dtyle.AI" data-skills="Python|LLMs|Prompt Engineering|Fine-tuning|Transformers|LangChain|RAG Systems">
+                        <span class="tl-marker" aria-hidden="true"></span>
+                        <article class="card tl-card">
+                            <header class="tl-head">
+                                <div>
+                                    <h3 class="tl-role">LLM Intern</h3>
+                                    <p class="tl-company">Dtyle.AI <span class="tl-sub">IIT Madras Incubated · Virtual internship</span></p>
+                                </div>
+                                <p class="tl-date mono">Jan 2025 – June 2025</p>
+                            </header>
+                            <ul class="tl-points">
+                                <li>Appointed as a virtual intern to work on <strong>Large Language Models and Generative AI</strong></li>
+                                <li>Collaborated with the tech team under the CTO's mentorship on <strong>NLP-centric tasks</strong></li>
+                                <li>Contributed to <strong>prompt engineering, fine-tuning, and evaluation</strong> of LLM-based systems</li>
+                                <li>Engaged in research, experimentation, and practical application of <strong>transformer models</strong></li>
+                                <li>Ensured <strong>data privacy and responsible AI practices</strong> in project workflows</li>
+                                <li>Developed <strong>RAG-based architectures using Flan-T5 and LangChain</strong> for modular, context-aware Q&amp;A applications</li>
+                            </ul>
+                            <ul class="chips" aria-label="Technologies">
+                                <li class="chip">LLMs</li><li class="chip">Prompt Engineering</li><li class="chip">Fine-tuning</li><li class="chip">Transformers</li><li class="chip">Flan-T5</li><li class="chip">LangChain</li><li class="chip">RAG</li>
+                            </ul>
+                        </article>
+                    </li>
+
+                    <li class="tl-item" id="exp-cognibot" data-reveal data-kb data-kb-title="Experience: ML Intern at Cognibot Labs" data-title="ML Intern · Cognibot Labs" data-skills="Python|Scikit-learn|Gensim|TF-IDF|Topic Modeling (LDA)|NLTK|spaCy|Pandas|NumPy">
+                        <span class="tl-marker" aria-hidden="true"></span>
+                        <article class="card tl-card">
+                            <header class="tl-head">
+                                <div>
+                                    <h3 class="tl-role">ML Intern</h3>
+                                    <p class="tl-company">Cognibot Labs <span class="tl-sub">Internship</span></p>
+                                </div>
+                                <p class="tl-date mono">June 2024 – Dec 2024</p>
+                            </header>
+                            <ul class="tl-points">
+                                <li>Built <strong>end-to-end classical ML pipelines</strong> for text analytics using Scikit-learn, including preprocessing, feature engineering, model training, and evaluation</li>
+                                <li>Developed an <strong>LDA-based topic modeling system</strong> using Gensim &amp; TF-IDF to extract latent topics from large text datasets and improve document clustering</li>
+                                <li>Applied <strong>NLP techniques</strong> with NLTK, spaCy (tokenization, lemmatization, stopword removal) and trained models like Logistic Regression, Naive Bayes, SVM</li>
+                                <li>Performed <strong>model tuning &amp; evaluation</strong> using GridSearchCV, Cross-Validation, and metrics like Accuracy, Precision, Recall, F1-score, with data handling via Pandas, NumPy</li>
+                            </ul>
+                            <ul class="chips" aria-label="Technologies">
+                                <li class="chip">Scikit-learn</li><li class="chip">Gensim</li><li class="chip">LDA</li><li class="chip">TF-IDF</li><li class="chip">NLTK</li><li class="chip">spaCy</li><li class="chip">Pandas</li><li class="chip">NumPy</li>
+                            </ul>
+                        </article>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="section" aria-labelledby="projects-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">03</span> Featured projects</p>
+                    <h2 id="projects-title" class="section-title">Real-world applications of <em>ML &amp; GenAI</em></h2>
+                    <p class="section-sub">Each featured project has a live, interactive preview: click the sample questions, switch roles, or type in the editor. Previews are illustrative recreations built for this site; sample data is not from production systems.</p>
+                </header>
+
+                <div class="filters" role="group" aria-label="Filter projects" data-reveal>
+                    <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All <span class="filter-count" data-count-for="all"></span></button>
+                    <button class="filter" type="button" data-filter="genai" aria-pressed="false">GenAI &amp; RAG <span class="filter-count" data-count-for="genai"></span></button>
+                    <button class="filter" type="button" data-filter="production" aria-pressed="false">In production <span class="filter-count" data-count-for="production"></span></button>
+                    <button class="filter" type="button" data-filter="ml" aria-pressed="false">NLP &amp; ML <span class="filter-count" data-count-for="ml"></span></button>
+                </div>
+                <p class="sr-only" id="filter-status" aria-live="polite"></p>
+
+                <div class="projects">
+                    <!-- 01 · AWS Bedrock RAG -->
+                    <article class="project" id="proj-bedrock" data-category="genai" data-title="AWS Bedrock RAG Knowledge Assistant" data-skills="Python|AWS Bedrock|LangChain|ChromaDB|RAG Systems|LLMs|Streamlit|AWS S3|EC2">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Project: AWS Bedrock RAG-Based Knowledge Assistant">
+                            <div class="project-meta">
+                                <span class="project-num mono">01</span>
+                                <span class="pill">GenAI · RAG</span>
+                                <span class="pill pill-accent">Actively extending</span>
+                            </div>
+                            <h3 class="project-title">AWS Bedrock RAG-Based Knowledge Assistant</h3>
+                            <p class="project-summary">A Retrieval-Augmented Generation system built on AWS Bedrock (Titan LLM) and LangChain for context-aware question answering over custom knowledge sources.</p>
+                            <ul class="project-points">
+                                <li>Ingests, chunks and embeds documents with <strong>Amazon Titan Embeddings</strong>; vectors live in <strong>ChromaDB</strong> for semantic search.</li>
+                                <li>Retrieval + generation keeps answers grounded, <strong>significantly reducing hallucinations</strong>.</li>
+                                <li>Real-time <strong>Streamlit</strong> interface, now being extended with <strong>AWS S3</strong> storage and <strong>EC2</strong> deployment.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">AWS Bedrock</li><li class="chip">Titan LLM</li><li class="chip">LangChain</li><li class="chip">ChromaDB</li><li class="chip">Streamlit</li><li class="chip">Python</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="bedrock"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <a class="btn btn-sm btn-text" href="https://github.com/Lingesh-S/aws-bedrock-rag-knowledge-assistant" target="_blank" rel="noopener noreferrer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg> Source code<span class="sr-only"> (opens in new tab)</span></a>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-light" data-preview="bedrock" role="region" aria-label="Interactive preview of the Knowledge Assistant (illustrative)"></div>
+                        </div>
+                    </article>
+
+                    <!-- 02 · Codebase RAG -->
+                    <article class="project" id="proj-codebase" data-category="genai" data-title="Codebase RAG Assistant" data-skills="Python|LangChain|ChromaDB|FAISS|SentenceTransformers|Streamlit|RAG Systems|LLMs|PyTorch|Transformers">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Project: Codebase RAG Assistant">
+                            <div class="project-meta">
+                                <span class="project-num mono">02</span>
+                                <span class="pill">GenAI · RAG</span>
+                            </div>
+                            <h3 class="project-title">Codebase RAG Assistant</h3>
+                            <p class="project-summary">Ask questions about a codebase in plain English. A RAG system that pairs Mistral-7B (built on PyTorch) with semantic search over a vector store for code understanding and explanation.</p>
+                            <ul class="project-points">
+                                <li>Loads and chunks <strong>.py, .md and .json</strong> files, embeds them with <strong>SentenceTransformers</strong> and stores them in <strong>Chroma/FAISS</strong> for high-precision code retrieval.</li>
+                                <li><strong>LangChain</strong> orchestrates retrieval and <strong>Mistral-7B</strong> generation for real-time explanations.</li>
+                                <li>Modular <strong>Streamlit</strong> assistant for developer support.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">Mistral-7B</li><li class="chip">LangChain</li><li class="chip">ChromaDB</li><li class="chip">FAISS</li><li class="chip">SentenceTransformers</li><li class="chip">Streamlit</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="codebase"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <span class="private-note"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-lock"/></svg> Source available on request</span>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-dark" data-preview="codebase" role="region" aria-label="Interactive preview of the Codebase RAG Assistant (illustrative)"></div>
+                        </div>
+                    </article>
+
+                    <!-- 03 · XBRL auto-tagging -->
+                    <article class="project" id="proj-xbrl" data-category="production ml" data-title="XBRL Auto-Tagging Engine (DataTracks)" data-skills="Python|LSTM|NER|Docker|FastAPI|REST APIs">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Production work: XBRL auto-tagging with LSTM and NER at DataTracks">
+                            <div class="project-meta">
+                                <span class="project-num mono">03</span>
+                                <span class="pill">Production · DataTracks</span>
+                                <span class="pill pill-live"><span class="pulse-dot" aria-hidden="true"></span>In production</span>
+                            </div>
+                            <h3 class="project-title">XBRL Auto-Tagging Engine</h3>
+                            <p class="project-summary">LSTM + NER models that tag financial statements with XBRL taxonomy concepts across multiple region-specific taxonomies in core compliance products.</p>
+                            <ul class="project-points">
+                                <li>Built and maintain <strong>LSTM + NER auto-tagging models</strong> for multiple region-specific taxonomies.</li>
+                                <li><strong>Independent pipeline per taxonomy</strong>; trained &amp; deployed <strong>two new taxonomy pipelines end-to-end</strong>.</li>
+                                <li>Served with <strong>Docker, FastAPI and REST APIs</strong> on-premise for low-latency inference.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">LSTM</li><li class="chip">NER</li><li class="chip">XBRL</li><li class="chip">FastAPI</li><li class="chip">Docker</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="xbrl"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <span class="private-note"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-lock"/></svg> Proprietary work</span>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-light" data-preview="xbrl" role="region" aria-label="Interactive preview of XBRL auto-tagging on a sample income statement (illustrative)"></div>
+                        </div>
+                    </article>
+
+                    <!-- 04 · RAG next-word prediction -->
+                    <article class="project" id="proj-nextword" data-category="production genai" data-title="RAG Next-Word Prediction (DataTracks)" data-skills="Haystack|FastAPI|RabbitMQ|RAG Systems|Grafana|Prometheus|Docker">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Production work: RAG-based next-word prediction in a Word-like editor">
+                            <div class="project-meta">
+                                <span class="project-num mono">04</span>
+                                <span class="pill">Production · DataTracks</span>
+                                <span class="pill pill-live"><span class="pulse-dot" aria-hidden="true"></span>In production</span>
+                            </div>
+                            <h3 class="project-title">RAG-Powered Next-Word Prediction</h3>
+                            <p class="project-summary">Writing suggestions inside a Word-like editor in a flagship product. Retrieval-augmented, built for low-latency inference and monitored in production.</p>
+                            <ul class="project-points">
+                                <li>RAG-based next-word prediction built with <strong>Haystack, FastAPI and RabbitMQ</strong>.</li>
+                                <li>Designed for <strong>low-latency inference</strong> inside the editor's typing flow.</li>
+                                <li>Production monitoring and observability with <strong>Grafana and Prometheus</strong>.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">Haystack</li><li class="chip">FastAPI</li><li class="chip">RabbitMQ</li><li class="chip">Grafana</li><li class="chip">Prometheus</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="nextword"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <span class="private-note"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-lock"/></svg> Proprietary work</span>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-light" data-preview="nextword" role="region" aria-label="Try it: an editor with next-word suggestions (illustrative)"></div>
+                        </div>
+                    </article>
+
+                    <!-- 05 · LDA resume screening -->
+                    <article class="project" id="proj-lda" data-category="ml" data-title="LDA-Powered Resume Screening Dashboard" data-skills="Python|Topic Modeling (LDA)|Scikit-learn|Streamlit|LLMs">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Project: LDA-Powered Resume Screening Dashboard (published at ICCCAI-2024)">
+                            <div class="project-meta">
+                                <span class="project-num mono">05</span>
+                                <span class="pill">NLP · Research</span>
+                                <span class="pill pill-pink"><svg class="icon icon-xs" aria-hidden="true"><use href="#i-award"/></svg> Published at ICCCAI-2024</span>
+                            </div>
+                            <h3 class="project-title">LDA-Powered Resume Screening Dashboard</h3>
+                            <p class="project-summary">Presented at ICCCAI-2024 (Taylor's University, Malaysia). An interactive Streamlit dashboard that uses LDA to surface dominant topics and keywords from resumes and match them to roles.</p>
+                            <ul class="project-points">
+                                <li><strong>LDA (Latent Dirichlet Allocation)</strong> implemented with Scikit-learn extracts dominant topics and keywords.</li>
+                                <li>Custom NLP job-matching algorithm with <strong>token indexing</strong>, reaching <strong>&gt;80% accuracy</strong> in simulated resume screenings.</li>
+                                <li><strong>OpenAI API</strong> auto-generates personalized interview questions for recruiters.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">LDA</li><li class="chip">Scikit-learn</li><li class="chip">NLP</li><li class="chip">OpenAI API</li><li class="chip">Streamlit</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="lda"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <a class="btn btn-sm btn-text" href="https://github.com/Lingesh-S/lda-resume-screening-dashboard" target="_blank" rel="noopener noreferrer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg> Source code<span class="sr-only"> (opens in new tab)</span></a>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-light" data-preview="lda" role="region" aria-label="Interactive preview of the resume screening dashboard (illustrative)"></div>
+                        </div>
+                    </article>
+
+                    <!-- 06 · NoteNinja -->
+                    <article class="project" id="proj-noteninja" data-category="genai" data-title="NoteNinja AI · Personalized Learning Chatbot" data-skills="Python|LangChain|LLMs|Transformers|Hugging Face|Streamlit">
+                        <div class="project-info" data-reveal data-kb data-kb-title="Project: NoteNinja AI, a personalized learning chatbot (LangChain + Flan-T5)">
+                            <div class="project-meta">
+                                <span class="project-num mono">06</span>
+                                <span class="pill">GenAI · EdTech</span>
+                            </div>
+                            <h3 class="project-title">NoteNinja AI: Personalized Learning Chatbot</h3>
+                            <p class="project-summary">A learning assistant that lets students talk to their own lecture notes, PDFs and quizzes. Developed and deployed with LangChain and Flan-T5 for real-time, context-aware Q&amp;A.</p>
+                            <ul class="project-points">
+                                <li><strong>LangChain</strong> wires document loaders, retrievers and the LLM together.</li>
+                                <li><strong>Hugging Face Flan-T5</strong> generates answers grounded in the student's notes.</li>
+                                <li>Interactive <strong>Streamlit</strong> front end with PDF and text parsing.</li>
+                            </ul>
+                            <ul class="chips" aria-label="Tech stack">
+                                <li class="chip">LangChain</li><li class="chip">Flan-T5</li><li class="chip">Hugging Face</li><li class="chip">Streamlit</li>
+                            </ul>
+                            <div class="project-actions">
+                                <button class="btn btn-sm btn-ghost" type="button" data-case="noteninja"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-book"/></svg> Case study</button>
+                                <a class="btn btn-sm btn-text" href="https://github.com/Lingesh-S/NoteNinja-AI" target="_blank" rel="noopener noreferrer"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-github"/></svg> Repository<span class="sr-only"> (opens in new tab)</span></a>
+                            </div>
+                        </div>
+                        <div class="project-preview" data-reveal style="--d:1">
+                            <div class="pv pv-dark" data-preview="noteninja" role="region" aria-label="Interactive preview of the NoteNinja learning chatbot (illustrative)"></div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- More on GitHub -->
+                <div class="more">
+                    <div class="more-head" data-reveal>
+                        <h3 class="more-title">More on GitHub</h3>
+                        <a class="btn btn-sm btn-text" href="https://github.com/Lingesh-S?tab=repositories" target="_blank" rel="noopener noreferrer">All repositories<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                    </div>
+                    <ul class="more-grid">
+                        <li class="card mini mini-wide project-mini" id="proj-agents" data-category="genai" data-reveal data-kb data-kb-title="Project: Multi-Agent Blog Generator (LangGraph)" data-title="Multi-Agent Blog Generator" data-skills="Python|LangGraph|LLMs|FastAPI|Docker|Prometheus">
+                            <div class="mini-body">
+                                <div class="mini-top">
+                                    <span class="mini-icon" aria-hidden="true"><svg class="icon"><use href="#i-users"/></svg></span>
+                                    <span class="pill">GenAI · Agents</span>
+                                </div>
+                                <h4>Multi-Agent Blog Generator</h4>
+                                <p>A LangGraph system that orchestrates Researcher, Writer and Editor agents to research a topic and turn it into an edited blog post. Ships with a web dashboard, REST API, CLI, Docker setup, Ollama/OpenAI provider switching and optional Prometheus metrics.</p>
+                                <ul class="chips" aria-label="Tech stack"><li class="chip">LangGraph</li><li class="chip">FastAPI</li><li class="chip">Ollama</li><li class="chip">Docker</li><li class="chip">Prometheus</li></ul>
+                                <a class="mini-link" href="https://github.com/Lingesh-S/multi-agent-blog-generator" target="_blank" rel="noopener noreferrer">View repository<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                            </div>
+                            <div class="agent-flow" aria-hidden="true">
+                                <div class="agent"><span class="agent-dot"></span><b>Researcher</b><small>search · cache</small></div>
+                                <span class="agent-edge"></span>
+                                <div class="agent"><span class="agent-dot"></span><b>Writer</b><small>draft</small></div>
+                                <span class="agent-edge"></span>
+                                <div class="agent"><span class="agent-dot"></span><b>Editor</b><small>review · score</small></div>
+                            </div>
+                        </li>
+                        <li class="card mini project-mini" id="proj-mcq" data-category="genai" data-reveal style="--d:1" data-kb data-kb-title="Project: MCQ generator, Mistral-7B fine-tuned with LoRA" data-title="Mistral-7B LoRA MCQ Generator" data-skills="Python|Fine-tuning|LoRA|PEFT|Transformers|Hugging Face|PyTorch">
+                            <div class="mini-top">
+                                <span class="mini-icon" aria-hidden="true"><svg class="icon"><use href="#i-layers"/></svg></span>
+                                <span class="pill">Fine-tuning</span>
+                            </div>
+                            <h4>MCQ Generator: Mistral-7B + LoRA</h4>
+                            <p>Fine-tuned Mistral-7B-Instruct with LoRA adapters (PEFT, 8-bit via bitsandbytes) to generate multiple-choice questions from academic paragraphs. Model published on Hugging Face.</p>
+                            <ul class="chips" aria-label="Tech stack"><li class="chip">Mistral-7B</li><li class="chip">LoRA</li><li class="chip">PEFT</li><li class="chip">bitsandbytes</li></ul>
+                            <div class="mini-links">
+                                <a class="mini-link" href="https://github.com/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener noreferrer">Repository<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                                <a class="mini-link" href="https://huggingface.co/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener noreferrer">Model card<span class="sr-only"> on Hugging Face (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                            </div>
+                        </li>
+                        <li class="card mini project-mini" id="proj-tamil" data-category="genai" data-reveal style="--d:2" data-kb data-kb-title="Project: Fine-tuning LLMs for Tamil story generation" data-title="Fine-Tuning LLMs for Tamil Stories" data-skills="Python|Fine-tuning|LoRA|PEFT|Transformers|Hugging Face|Pandas">
+                            <div class="mini-top">
+                                <span class="mini-icon" aria-hidden="true"><svg class="icon"><use href="#i-book"/></svg></span>
+                                <span class="pill">Fine-tuning</span>
+                            </div>
+                            <h4>Fine-Tuning LLMs for Tamil Story Generation</h4>
+                            <p>Two-part experiment: baseline fine-tuning with the Hugging Face Trainer, then parameter-efficient LoRA fine-tuning of distilgpt2 on a Tamil story dataset.</p>
+                            <ul class="chips" aria-label="Tech stack"><li class="chip">Transformers</li><li class="chip">LoRA</li><li class="chip">PEFT</li><li class="chip">Datasets</li></ul>
+                            <a class="mini-link" href="https://github.com/Lingesh-S/fine-tuning-llm" target="_blank" rel="noopener noreferrer">Repository<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                        </li>
+                        <li class="card mini project-mini" id="proj-lungai" data-category="ml" data-reveal style="--d:1" data-kb data-kb-title="Project: LungAI chest X-ray classification with CNNs and Grad-CAM" data-title="LungAI · Chest X-ray CNN" data-skills="Python|TensorFlow|NumPy|Streamlit">
+                            <div class="mini-top">
+                                <span class="mini-icon" aria-hidden="true"><svg class="icon"><use href="#i-eye"/></svg></span>
+                                <span class="pill">Deep learning · Vision</span>
+                            </div>
+                            <h4>LungAI: Chest X-ray Classification</h4>
+                            <p>CNN-based classifier for chest X-rays (Normal vs Pneumonia) with Grad-CAM explainability and an optional Streamlit app for real-time predictions.</p>
+                            <ul class="chips" aria-label="Tech stack"><li class="chip">TensorFlow</li><li class="chip">Keras</li><li class="chip">OpenCV</li><li class="chip">Grad-CAM</li></ul>
+                            <a class="mini-link" href="https://github.com/Lingesh-S/xray-diagnosis-cnn" target="_blank" rel="noopener noreferrer">Repository<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                        </li>
+                        <li class="card mini project-mini" id="proj-carsales" data-category="ml" data-reveal style="--d:2" data-kb data-kb-title="Project: Car sales analytics with Python, SQL and Power BI" data-title="Car Sales Analytics" data-skills="Python|SQL|Pandas|NumPy">
+                            <div class="mini-top">
+                                <span class="mini-icon" aria-hidden="true"><svg class="icon"><use href="#i-chart"/></svg></span>
+                                <span class="pill">Analytics</span>
+                            </div>
+                            <h4>Car Sales Analytics</h4>
+                            <p>End-to-end analysis of car sales data: cleaning and EDA in Python, KPI queries in SQL, and interactive Power BI dashboards for regional revenue, dealer performance and customer demographics.</p>
+                            <ul class="chips" aria-label="Tech stack"><li class="chip">Pandas</li><li class="chip">SQL</li><li class="chip">Power BI</li></ul>
+                            <a class="mini-link" href="https://github.com/Lingesh-S/car-sales-analytics" target="_blank" rel="noopener noreferrer">Repository<span class="sr-only"> (opens in new tab)</span> <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section section-alt" aria-labelledby="skills-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">04</span> Technical skills</p>
+                    <h2 id="skills-title" class="section-title">Technologies and tools <em>I work with</em></h2>
+                    <p class="section-sub">Select any skill to see exactly where I've used it across roles and projects.</p>
+                </header>
+
+                <div class="skills-grid">
+                    <div class="card skill-card skill-wide" data-reveal data-kb data-kb-title="Skills: GenAI and RAG">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-sparkles"/></svg></span><h3>GenAI &amp; RAG</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="LangChain">LangChain</button></li>
+                            <li><button class="skill" type="button" data-skill="LangGraph">LangGraph</button></li>
+                            <li><button class="skill" type="button" data-skill="Haystack">Haystack</button></li>
+                            <li><button class="skill" type="button" data-skill="RAG Systems">RAG Systems</button></li>
+                            <li><button class="skill" type="button" data-skill="LLMs">LLMs</button></li>
+                            <li><button class="skill" type="button" data-skill="Prompt Engineering">Prompt Engineering</button></li>
+                            <li><button class="skill" type="button" data-skill="AWS Bedrock">AWS Bedrock</button></li>
+                            <li><button class="skill" type="button" data-skill="Hugging Face">Hugging Face</button></li>
+                            <li><button class="skill" type="button" data-skill="SentenceTransformers">SentenceTransformers</button></li>
+                        </ul>
+                    </div>
+
+                    <aside class="card skill-explorer" id="skill-explorer" aria-labelledby="se-title" data-reveal style="--d:1">
+                        <p class="eyebrow eyebrow-sm">Skill explorer</p>
+                        <div class="se-live" aria-live="polite">
+                            <h3 class="se-title" id="se-title">Pick a skill</h3>
+                            <p class="se-desc">Every skill on this page is backed by real work. Choose one to see where it shows up.</p>
+                            <ul class="se-list"></ul>
+                        </div>
+                    </aside>
+
+                    <div class="card skill-card" data-reveal data-kb data-kb-title="Skills: ML and deep learning">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-cpu"/></svg></span><h3>ML &amp; Deep Learning</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="Scikit-learn">Scikit-learn</button></li>
+                            <li><button class="skill" type="button" data-skill="TensorFlow">TensorFlow</button></li>
+                            <li><button class="skill" type="button" data-skill="PyTorch">PyTorch</button></li>
+                            <li><button class="skill" type="button" data-skill="LSTM">LSTM</button></li>
+                            <li><button class="skill" type="button" data-skill="NER">NER</button></li>
+                            <li><button class="skill" type="button" data-skill="Transformers">Transformers</button></li>
+                            <li><button class="skill" type="button" data-skill="Fine-tuning">Fine-tuning</button></li>
+                            <li><button class="skill" type="button" data-skill="LoRA">LoRA</button></li>
+                            <li><button class="skill" type="button" data-skill="PEFT">PEFT</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card" data-reveal style="--d:1" data-kb data-kb-title="Skills: NLP">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-message"/></svg></span><h3>NLP</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="NLTK">NLTK</button></li>
+                            <li><button class="skill" type="button" data-skill="spaCy">spaCy</button></li>
+                            <li><button class="skill" type="button" data-skill="Gensim">Gensim</button></li>
+                            <li><button class="skill" type="button" data-skill="TF-IDF">TF-IDF</button></li>
+                            <li><button class="skill" type="button" data-skill="Topic Modeling (LDA)">Topic Modeling (LDA)</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card" data-reveal style="--d:2" data-kb data-kb-title="Skills: languages, databases and vector stores">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-database"/></svg></span><h3>Languages &amp; Databases</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="Python">Python</button></li>
+                            <li><button class="skill" type="button" data-skill="SQL">SQL</button></li>
+                            <li><button class="skill" type="button" data-skill="MySQL">MySQL</button></li>
+                            <li><button class="skill" type="button" data-skill="ChromaDB">ChromaDB</button></li>
+                            <li><button class="skill" type="button" data-skill="FAISS">FAISS</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card skill-wide" data-reveal data-kb data-kb-title="Skills: backend, infrastructure and monitoring (MLOps)">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-server"/></svg></span><h3>Backend, Infra &amp; Monitoring</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="FastAPI">FastAPI</button></li>
+                            <li><button class="skill" type="button" data-skill="REST APIs">REST APIs</button></li>
+                            <li><button class="skill" type="button" data-skill="RabbitMQ">RabbitMQ</button></li>
+                            <li><button class="skill" type="button" data-skill="Docker">Docker</button></li>
+                            <li><button class="skill" type="button" data-skill="Grafana">Grafana</button></li>
+                            <li><button class="skill" type="button" data-skill="Prometheus">Prometheus</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card" data-reveal style="--d:1" data-kb data-kb-title="Skills: cloud platforms (AWS)">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-cloud"/></svg></span><h3>Cloud (AWS)</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="AWS S3">S3</button></li>
+                            <li><button class="skill" type="button" data-skill="SageMaker">SageMaker</button></li>
+                            <li><button class="skill" type="button" data-skill="Lambda">Lambda</button></li>
+                            <li><button class="skill" type="button" data-skill="EC2">EC2</button></li>
+                            <li><button class="skill" type="button" data-skill="Glue">Glue</button></li>
+                            <li><button class="skill" type="button" data-skill="Athena">Athena</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card" data-reveal data-kb data-kb-title="Skills: big data and streaming">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-activity"/></svg></span><h3>Big Data &amp; Streaming</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="PySpark">Apache Spark (PySpark)</button></li>
+                            <li><button class="skill" type="button" data-skill="Kafka">Apache Kafka</button></li>
+                        </ul>
+                    </div>
+
+                    <div class="card skill-card" data-reveal style="--d:2" data-kb data-kb-title="Skills: data and tools">
+                        <div class="skill-head"><span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-terminal"/></svg></span><h3>Data &amp; Tools</h3></div>
+                        <ul class="skill-list">
+                            <li><button class="skill" type="button" data-skill="Pandas">Pandas</button></li>
+                            <li><button class="skill" type="button" data-skill="NumPy">NumPy</button></li>
+                            <li><button class="skill" type="button" data-skill="Git">Git</button></li>
+                            <li><button class="skill" type="button" data-skill="Streamlit">Streamlit</button></li>
+                            <li><button class="skill" type="button" data-skill="Flask">Flask</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education & achievements -->
+        <section id="education" class="section" aria-labelledby="education-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">05</span> Education &amp; achievements</p>
+                    <h2 id="education-title" class="section-title">Academic background and <em>achievements</em></h2>
+                </header>
+
+                <div class="edu-grid">
+                    <article class="card edu-card" data-reveal data-kb data-kb-title="Education: B.E. Computer Science Engineering, Sathyabama University">
+                        <div class="edu-top">
+                            <span class="focus-icon focus-icon-lg" aria-hidden="true"><svg class="icon"><use href="#i-grad"/></svg></span>
+                            <p class="tl-date mono">2020 – 2024</p>
+                        </div>
+                        <h3 class="edu-degree">B.E. Computer Science Engineering</h3>
+                        <p class="edu-school">Sathyabama University, Chennai</p>
+                        <dl class="edu-details">
+                            <div class="edu-cgpa">
+                                <dt>CGPA</dt>
+                                <dd>
+                                    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+                                        <defs>
+                                            <linearGradient id="ring-grad" x1="0" y1="0" x2="1" y2="1">
+                                                <stop offset="0" stop-color="#22d3ee"/>
+                                                <stop offset="1" stop-color="#a78bfa"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle class="ring-track" cx="60" cy="60" r="52"/>
+                                        <circle class="ring-value" cx="60" cy="60" r="52" pathLength="100" style="--value:84.1"/>
+                                    </svg>
+                                    <span class="ring-label"><span data-count="8.41" data-decimals="2">8.41</span><small>/ 10</small></span>
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Specialization</dt>
+                                <dd class="edu-val">General</dd>
+                            </div>
+                            <div>
+                                <dt>Mode</dt>
+                                <dd class="edu-val">Full-time</dd>
+                            </div>
+                        </dl>
+                    </article>
+
+                    <article class="card pub-card" data-reveal style="--d:1" data-kb data-kb-title="Achievement: published research paper at ICCCAI-2024">
+                        <div class="pub-glow" aria-hidden="true"></div>
+                        <p class="eyebrow eyebrow-sm"><svg class="icon icon-xs" aria-hidden="true"><use href="#i-award"/></svg> Published research paper</p>
+                        <h3 class="pub-title">"LDA-Powered Resume Screening Dashboard with Token Indexing &amp; Streamlit"</h3>
+                        <p>Published and presented at <strong>ICCCAI-2024</strong>, in association with <strong>Taylor's University, Malaysia</strong>.</p>
+                        <button class="btn btn-sm btn-ghost" type="button" data-case="lda">Read the case study <svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+                    </article>
+                </div>
+
+                <h3 class="sub-head" data-reveal>Achievements</h3>
+                <ul class="achievements">
+                    <li class="card ach-card" data-reveal data-kb data-kb-title="Achievement: published research paper">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-award"/></svg></span>
+                        <div>
+                            <h4>Published Research Paper</h4>
+                            <p>Published and presented a research paper titled "LDA-Powered Resume Screening Dashboard with Token Indexing &amp; Streamlit" at ICCCAI-2024, in association with Taylor's University, Malaysia.</p>
+                        </div>
+                    </li>
+                    <li class="card ach-card" data-reveal style="--d:1" data-kb data-kb-title="Achievement: personalized learning chatbot">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-bot"/></svg></span>
+                        <div>
+                            <h4>Personalized Learning Chatbot</h4>
+                            <p>Developed and deployed a personalized learning chatbot for students using LangChain and Flan-T5, enabling real-time, context-aware Q&amp;A from academic notes.</p>
+                        </div>
+                    </li>
+                    <li class="card ach-card" data-reveal style="--d:2" data-kb data-kb-title="Achievement: RAG-powered codebase assistant">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-code"/></svg></span>
+                        <div>
+                            <h4>RAG-Powered Codebase Assistant</h4>
+                            <p>Engineered a RAG-powered Codebase Assistant using LLMs, LangChain, and vector databases to help programmers understand, query and explore codebases through natural language.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="section section-alt section-tight" aria-labelledby="certifications-title">
+            <div class="container">
+                <header class="section-head" data-reveal>
+                    <p class="eyebrow"><span class="eyebrow-num">06</span> Certifications</p>
+                    <h2 id="certifications-title" class="section-title">Professional <em>credentials</em></h2>
+                </header>
+                <ul class="certs">
+                    <li class="card cert-card" data-reveal data-kb data-kb-title="Certification: Machine Learning Internship, Cognibot Labs">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-badge"/></svg></span>
+                        <div><h3>Machine Learning Internship</h3><p>Cognibot Labs</p></div>
+                    </li>
+                    <li class="card cert-card" data-reveal style="--d:1" data-kb data-kb-title="Certification: Cloud Data Management Associate, Oracle">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-cloud"/></svg></span>
+                        <div><h3>Cloud Data Management Associate</h3><p>Oracle</p></div>
+                    </li>
+                    <li class="card cert-card" data-reveal style="--d:2" data-kb data-kb-title="Certification: Data Analytics Virtual Experience, Accenture">
+                        <span class="focus-icon" aria-hidden="true"><svg class="icon"><use href="#i-chart"/></svg></span>
+                        <div><h3>Data Analytics Virtual Experience</h3><p>Accenture</p></div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="section" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="contact-card" data-reveal data-kb data-kb-title="Contact: email, LinkedIn, GitHub and phone">
+                    <div class="contact-glow" aria-hidden="true"></div>
+                    <p class="eyebrow"><span class="eyebrow-num">07</span> Contact</p>
+                    <h2 id="contact-title" class="contact-title">Let's build something <em>intelligent</em> together.</h2>
+                    <p class="contact-sub">Have a role, project or idea involving ML, GenAI or RAG? I'd love to hear about it. Email is the fastest way to reach me.</p>
+
+                    <div class="contact-email">
+                        <a class="btn btn-primary btn-lg" href="mailto:lingeshsrinivasan1@gmail.com">
+                            <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+                            lingeshsrinivasan1@gmail.com
+                        </a>
+                        <button class="btn btn-ghost btn-lg copy-email" type="button" data-copy="lingeshsrinivasan1@gmail.com">
+                            <svg class="icon icon-copy" aria-hidden="true"><use href="#i-copy"/></svg>
+                            <svg class="icon icon-check" aria-hidden="true"><use href="#i-check"/></svg>
+                            <span class="copy-label">Copy email</span>
+                        </button>
+                    </div>
+
+                    <ul class="contact-links">
+                        <li><a href="https://www.linkedin.com/in/lingesh-s29" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg><span><b>LinkedIn</b><small>in/lingesh-s29</small></span><span class="sr-only"> (opens in new tab)</span></a></li>
+                        <li><a href="https://github.com/Lingesh-S" target="_blank" rel="noopener noreferrer"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg><span><b>GitHub</b><small>Lingesh-S</small></span><span class="sr-only"> (opens in new tab)</span></a></li>
+                        <li><a href="tel:+917299307308"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><span><b>Phone</b><small>+91 72993 07308</small></span></a></li>
+                        <li><a href="Lingesh_Resume.pdf" download="Lingesh_S_Resume.pdf"><svg class="icon" aria-hidden="true"><use href="#i-download"/></svg><span><b>Resume</b><small>PDF · 3 pages</small></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <p>Designed &amp; Built by <span class="grad-text">Lingesh S</span></p>
+                <p class="footer-small">© <span id="year">2026</span> All rights reserved · Built with HTML, CSS &amp; vanilla JS. No frameworks.</p>
+            </div>
+            <a class="btn btn-sm btn-ghost" href="#home"><svg class="icon icon-sm" aria-hidden="true"><use href="#i-arrow-up"/></svg> Back to top</a>
+        </div>
+    </footer>
+
+    <!-- Ask my portfolio -->
+    <button class="ask-fab ask-open" type="button" aria-haspopup="dialog" aria-controls="ask-dialog">
+        <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+        <span class="ask-fab-label">Ask my portfolio</span>
+    </button>
+
+    <dialog class="ask" id="ask-dialog" aria-labelledby="ask-title">
+        <div class="ask-head">
+            <div>
+                <h2 id="ask-title"><svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg> Ask my portfolio</h2>
+                <p>A tiny retrieval engine that runs in your browser: TF-IDF vectors and cosine similarity over this page. No API calls; nothing leaves your device.</p>
+            </div>
+            <button class="icon-btn" type="button" data-close aria-label="Close">
+                <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+            </button>
+        </div>
+        <form class="ask-form" role="search">
+            <label class="sr-only" for="ask-input">Ask a question about Lingesh</label>
+            <svg class="icon ask-form-icon" aria-hidden="true"><use href="#i-search"/></svg>
+            <input id="ask-input" type="text" enterkeyhint="search" placeholder="e.g. What RAG systems has he built?" autocomplete="off" maxlength="200">
+            <button class="btn btn-sm btn-primary" type="submit">Ask</button>
+        </form>
+        <div class="ask-suggest" role="group" aria-label="Suggested questions">
+            <button type="button" class="chip-btn">What RAG systems has he built?</button>
+            <button type="button" class="chip-btn">Production ML experience?</button>
+            <button type="button" class="chip-btn">Which cloud tools does he know?</button>
+            <button type="button" class="chip-btn">Any publications?</button>
+            <button type="button" class="chip-btn">How do I contact him?</button>
+        </div>
+        <div class="ask-results" aria-live="polite"></div>
+    </dialog>
+
+    <!-- Case study -->
+    <dialog class="case" id="case-dialog" aria-labelledby="case-title">
+        <div class="case-inner">
+            <button class="icon-btn case-close" type="button" data-close aria-label="Close case study">
+                <svg class="icon" aria-hidden="true"><use href="#i-close"/></svg>
+            </button>
+            <p class="eyebrow eyebrow-sm case-eyebrow"></p>
+            <h2 class="case-title" id="case-title"></h2>
+            <p class="case-summary"></p>
+            <div class="case-grid">
+                <section>
+                    <h3>The problem</h3>
+                    <p class="case-problem"></p>
+                </section>
+                <section>
+                    <h3>What I built</h3>
+                    <ul class="case-built"></ul>
+                </section>
+            </div>
+            <section>
+                <h3>Architecture</h3>
+                <ol class="case-flow"></ol>
+            </section>
+            <section>
+                <h3>Stack</h3>
+                <ul class="chips case-stack"></ul>
+            </section>
+            <div class="case-actions"></div>
+        </div>
+    </dialog>
+
+    <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
