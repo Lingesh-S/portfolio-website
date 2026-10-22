@@ -1,0 +1,574 @@
+---
+import '../styles/global.css';
+import '../styles/previews.css';
+import Sprite from '../components/Sprite.astro';
+import HeroStage from '../components/HeroStage.tsx';
+import HeroSearch from '../components/HeroSearch.tsx';
+import { CATEGORIES, ITEMS, ITEM_BY_ID, PROFILE, usedIn, type Category, type Item } from '../data/content';
+import space from '../data/space.json';
+
+const title = 'Lingesh S · Data Scientist · ML, GenAI & RAG Systems';
+const description = 'Lingesh S is a Data Scientist building production-grade ML and GenAI systems: XBRL auto-tagging with LSTM + NER, retrieval-augmented generation and LLM-powered features for enterprise products.';
+
+const roles = ITEMS.filter((i) => i.kind === 'role');
+const featured = ITEMS.filter((i) => i.kind === 'project' && i.featured);
+const others = ITEMS.filter((i) => i.kind === 'project' && !i.featured);
+const education = ITEMS.find((i) => i.kind === 'education') as Item;
+const certs = ITEMS.filter((i) => i.kind === 'certification');
+const color = (item: Item) => CATEGORIES[item.category].color;
+
+const allSkills = ITEMS.filter((i) => i.kind === 'skill');
+const maxUse = Math.max(...allSkills.map((s) => usedIn(s.id).length));
+const skillGroups = (Object.keys(CATEGORIES) as Category[])
+    .map((c) => ({
+        category: c,
+        skills: allSkills
+            .filter((s) => s.category === c)
+            .map((s) => ({ ...s, used: usedIn(s.id) }))
+            .sort((a, b) => b.used.length - a.used.length)
+    }))
+    .filter((g) => g.skills.length);
+
+// Static 2D view of the space (first two UMAP axes), shown until the 3D scene loads
+const PW = 600;
+const PH = 420;
+const PM = 34;
+const xs = space.items.map((p) => p.pos[0]);
+const ys = space.items.map((p) => p.pos[1]);
+const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
+const px = (v: number) => PM + ((v - minX) / (maxX - minX)) * (PW - 2 * PM);
+const py = (v: number) => PH - PM - ((v - minY) / (maxY - minY)) * (PH - 2 * PM);
+const posterPoints = space.items.map((p) => {
+    const item = ITEM_BY_ID[p.id];
+    return { x: px(p.pos[0]), y: py(p.pos[1]), c: color(item), r: item.kind === 'skill' ? 3 : item.kind === 'certification' ? 3.5 : 5 };
+});
+const posterEdges = space.edges.map(([i, j]) => ({ a: posterPoints[i], b: posterPoints[j] }));
+
+const nav = [
+    ['about', 'About'],
+    ['experience', 'Experience'],
+    ['work', 'Work'],
+    ['skills', 'Skills'],
+    ['research', 'Research'],
+    ['contact', 'Contact']
+];
+const rotating = ['production ML', 'RAG systems', 'NLP pipelines', 'LLM-powered features'];
+---
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <meta name="author" content={PROFILE.name}>
+    <meta name="theme-color" content="#0c0c0b">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content="https://lingesh-dev.netlify.app/">
+    <meta name="twitter:card" content="summary">
+    <link rel="canonical" href="https://lingesh-dev.netlify.app/">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: PROFILE.name,
+        jobTitle: PROFILE.role,
+        worksFor: { '@type': 'Organization', name: PROFILE.company },
+        alumniOf: { '@type': 'CollegeOrUniversity', name: 'Sathyabama University' },
+        email: `mailto:${PROFILE.email}`,
+        sameAs: [PROFILE.github, PROFILE.linkedin]
+    })} />
+</head>
+<body>
+    <Sprite />
+    <a class="skip-link" href="#about">Skip to content</a>
+    <div class="progress" aria-hidden="true"><span></span></div>
+
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a class="brand" href="#top" aria-label="Lingesh S, back to top">
+                <span class="brand-mark" aria-hidden="true">LS</span>
+                <span class="brand-name">Lingesh S</span>
+            </a>
+            <nav class="nav" aria-label="Sections">
+                <div class="nav-track">
+                    <span class="nav-indicator" aria-hidden="true"></span>
+                    <ul class="nav-links">
+                        {nav.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}
+                    </ul>
+                </div>
+                <a class="btn btn-primary btn-sm" href={PROFILE.resume} download="Lingesh_S_Resume.pdf">
+                    Resume <span class="arrow" aria-hidden="true">↓</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero: the 3D embedding space fills the background -->
+        <section class="hero" id="top" aria-labelledby="hero-title">
+            <div class="hero-stage">
+                <div class="fig-static" aria-hidden="true">
+                    <svg viewBox={`0 0 ${PW} ${PH}`}>
+                        {posterEdges.map((e) => <line x1={e.a.x} y1={e.a.y} x2={e.b.x} y2={e.b.y} stroke="#3a3933" stroke-width="0.8" />)}
+                        {posterPoints.map((p) => <circle cx={p.x} cy={p.y} r={p.r} fill={p.c} />)}
+                    </svg>
+                </div>
+                <HeroStage client:only="react" />
+            </div>
+
+            <div class="wrap hero-inner">
+                <div class="hero-copy">
+                    <p class="kicker intro-anim" style="--d:0"><span class="live-dot" aria-hidden="true"></span>{PROFILE.role} @ {PROFILE.company}</p>
+                    <h1 id="hero-title" aria-label={PROFILE.name}>
+                        <span class="word" aria-hidden="true"><span style="--i:0">Lingesh</span></span>
+                        <span class="word" aria-hidden="true"><span class="accent" style="--i:1">S</span></span>
+                    </h1>
+                    <p class="rotator intro-anim" style="--d:2">
+                        <span>Building</span>
+                        <span class="rotator-window" data-words={JSON.stringify(rotating)}>
+                            <span class="rotator-word">{rotating[0]}</span>
+                        </span>
+                        <span class="caret-bar" aria-hidden="true"></span>
+                    </p>
+                    <p class="hero-lede intro-anim" style="--d:3">{PROFILE.lede}</p>
+                    <div class="hero-actions intro-anim" style="--d:4">
+                        <a class="btn btn-primary" href="#work">View selected work <span class="arrow" aria-hidden="true">→</span></a>
+                        <a class="btn btn-ghost" href={`mailto:${PROFILE.email}`}>Get in touch</a>
+                    </div>
+                    <div class="intro-anim search-slot" style="--d:5">
+                        <HeroSearch client:only="react" />
+                    </div>
+                </div>
+            </div>
+
+            <a class="scroll-cue" href="#about">Scroll<span aria-hidden="true"></span></a>
+        </section>
+
+        <!-- Key figures -->
+        <section class="band" aria-label="Key figures">
+            <div class="wrap">
+                <dl>
+                    <div class="reveal" style="--d:0"><dt>industry roles in ML &amp; GenAI</dt><dd data-count="3">3</dd></div>
+                    <div class="reveal" style="--d:1"><dt>taxonomy pipelines shipped end-to-end</dt><dd data-count="2">2</dd></div>
+                    <div class="reveal" style="--d:2"><dt>international publication, ICCCAI-2024</dt><dd data-count="1">1</dd></div>
+                    <div class="reveal" style="--d:3"><dt>job-match accuracy in published research</dt><dd><em>&gt;</em><span data-count="80">80</span>%</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="tag">About</p>
+                        <h2 id="about-title">Turning complex models into<br />reliable product features.</h2>
+                    </div>
+                </div>
+                <div class="about-grid">
+                    <div class="prose">{PROFILE.about.map((p, i) => <p class="reveal" style={`--d:${i}`}>{p}</p>)}</div>
+                    <div class="card facts reveal" style="--d:2">
+                        <dl>
+                            <div><dt>Currently</dt><dd>{PROFILE.role}, {PROFILE.company}</dd></div>
+                            <div><dt>Focus</dt><dd>Production ML · GenAI &amp; RAG · NLP</dd></div>
+                            <div><dt>Education</dt><dd>B.E. Computer Science, Sathyabama University</dd></div>
+                            <div><dt>Research</dt><dd>Published at ICCCAI-2024</dd></div>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="section section-alt section-lazy" id="experience" aria-labelledby="experience-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="tag">Experience</p>
+                        <h2 id="experience-title">Where I've built ML</h2>
+                    </div>
+                </div>
+                <ol class="roles">
+                    {roles.map((r) => (
+                        <li class={`role reveal${r.badge === 'Current' ? ' is-current' : ''}`} id={`item-${r.id}`}>
+                            <p class="role-date">
+                                {r.dates}
+                                {r.badge === 'Current' && <><br /><span class="badge">Current</span></>}
+                            </p>
+                            <div>
+                                <h3>{r.title}</h3>
+                                <p class="role-org">{r.subtitle}{r.badge && r.badge !== 'Current' ? ` · ${r.badge}` : ''}</p>
+                                <ul class="points">{r.points?.map((p) => <li>{p}</li>)}</ul>
+                                <p class="stack">{r.stack?.join(' · ')}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ol>
+            </div>
+        </section>
+
+        <!-- Selected work -->
+        <section class="section section-lazy" id="work" aria-labelledby="work-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="tag">Selected work</p>
+                        <h2 id="work-title">Projects &amp; production systems</h2>
+                    </div>
+                    <p class="section-sub">Open a case study for the problem, the architecture and a live interactive demo.</p>
+                </div>
+                <div class="cases">
+                    {featured.map((p, i) => (
+                        <details class="case reveal" style={`--d:${i}`} id={`item-${p.id}`} open={i === 0} data-demo={p.preview} data-title={p.title}>
+                            <summary>
+                                <span class="case-num">{String(i + 1).padStart(2, '0')}</span>
+                                <span>
+                                    <span class="case-title">{p.title}</span>
+                                    <span class="case-sub">{p.subtitle}</span>
+                                </span>
+                                <span class="case-meta">
+                                    <span class="tag" style={`--c:${color(p)}`}><span class="dot"></span>{CATEGORIES[p.category].label}</span>
+                                    {p.badge && <span class="case-badge">{p.badge}</span>}
+                                </span>
+                                <span class="case-toggle" aria-hidden="true"></span>
+                            </summary>
+                            <div class="case-body">
+                                <div class="case-inner">
+                                    <div class="case-col">
+                                        <p>{p.summary}</p>
+                                        {p.problem && <div><h4>Problem</h4><p>{p.problem}</p></div>}
+                                        <div><h4>What I built</h4><ul class="points">{p.points?.map((pt) => <li>{pt}</li>)}</ul></div>
+                                    </div>
+                                    <div class="case-col">
+                                        {p.flow && (
+                                            <div>
+                                                <h4>Architecture</h4>
+                                                <ol class="pipeline">{p.flow.map((f) => <li>{f}</li>)}</ol>
+                                            </div>
+                                        )}
+                                        <div><h4>Stack</h4><p class="stack">{p.stack?.join(' · ')}</p></div>
+                                        <div class="case-links">
+                                            {p.links?.map((l) => (
+                                                <a class="text-link" href={l.href} target="_blank" rel="noopener noreferrer">
+                                                    {l.label} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span>
+                                                </a>
+                                            ))}
+                                            {p.note && <p class="case-note">{p.note}</p>}
+                                        </div>
+                                    </div>
+                                    {p.preview && (
+                                        <div class="case-demo">
+                                            <div class="demo-head">
+                                                <h4>Interactive demo</h4>
+                                                <small>Illustrative recreation with sample data</small>
+                                            </div>
+                                            <div class="demo-host" data-demo-host></div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </details>
+                    ))}
+                </div>
+
+                <h3 class="more-head reveal">More projects</h3>
+                <ul class="more-grid">
+                    {others.map((p, i) => (
+                        <li class="card more-card reveal" style={`--d:${i % 3}`} id={`item-${p.id}`}>
+                            <p class="tag" style={`--c:${color(p)}`}><span class="dot"></span>{CATEGORIES[p.category].label}</p>
+                            <h3>{p.title}</h3>
+                            <p>{p.summary}</p>
+                            <p class="stack">{p.stack?.join(' · ')}</p>
+                            <div class="case-links">
+                                {p.links?.map((l) => (
+                                    <a class="text-link" href={l.href} target="_blank" rel="noopener noreferrer">
+                                        {l.label} <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span>
+                                    </a>
+                                ))}
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section class="section section-alt section-lazy" id="skills" aria-labelledby="skills-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="tag">Skills</p>
+                        <h2 id="skills-title">Skills, weighted by use</h2>
+                    </div>
+                    <p class="section-sub">Each bar counts how many of the roles and projects on this page use that skill.</p>
+                </div>
+                <div class="skill-groups">
+                    {skillGroups.map((g, gi) => (
+                        <div class="card skill-group reveal" style={`--d:${gi % 2}`}>
+                            <h3><span class="dot" style={`--c:${CATEGORIES[g.category].color}`}></span>{CATEGORIES[g.category].label}</h3>
+                            <ul>
+                                {g.skills.map((s, i) => (
+                                    <li class="skill-row" id={`item-${s.id}`} style={`--c:${CATEGORIES[g.category].color};--w:${(s.used.length / maxUse).toFixed(3)};--i:${i}`}>
+                                        <span>
+                                            <span class="skill-name">{s.title}</span>
+                                            <span class="skill-used">{s.used.length ? s.used.map((u) => u.title).join(', ') : 'On my resume'}</span>
+                                        </span>
+                                        <span class="skill-bar" aria-hidden="true"><span></span></span>
+                                        <span class="skill-count" aria-label={`Used in ${s.used.length} roles or projects`}>{s.used.length}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        <!-- Research & education -->
+        <section class="section section-lazy" id="research" aria-labelledby="research-title">
+            <div class="wrap">
+                <div class="section-head reveal">
+                    <div>
+                        <p class="tag">Research &amp; education</p>
+                        <h2 id="research-title">Research &amp; education</h2>
+                    </div>
+                </div>
+                <div class="research-grid">
+                    <div class="card cite reveal" id="item-publication">
+                        <p class="tag">Published research · 2024</p>
+                        <blockquote>“LDA-Powered Resume Screening Dashboard with Token Indexing &amp; Streamlit”</blockquote>
+                        <p>Published and presented at ICCCAI-2024, in association with Taylor’s University, Malaysia.<a class="text-link" href="#item-lda">See the project</a></p>
+                    </div>
+                    <div>
+                        <div class="card edu-item reveal" style="--d:1" id="item-education">
+                            <h3>{education.title}</h3>
+                            <p>{education.subtitle}</p>
+                            <p class="stack">{education.dates} · CGPA 8.41 / 10 · Full-time</p>
+                        </div>
+                        <div class="card edu-item reveal" style="--d:2">
+                            <h3>Certifications</h3>
+                            <ul class="cert-list">
+                                {certs.map((c) => <li id={`item-${c.id}`}>{c.title} <span>· {c.subtitle}</span></li>)}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="section section-alt contact" id="contact" aria-labelledby="contact-title">
+            <div class="wrap">
+                <p class="tag reveal" style="color: var(--accent)">Contact</p>
+                <h2 id="contact-title" class="reveal" style="--d:1">Have a role or project in ML or GenAI? Let’s talk.</h2>
+                <a class="contact-mail reveal" style="--d:2" href={`mailto:${PROFILE.email}`}>
+                    {PROFILE.email} <span class="arrow" aria-hidden="true">↗</span>
+                </a>
+                <ul class="contact-links reveal" style="--d:3">
+                    <li><a class="text-link" href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a></li>
+                    <li><a class="text-link" href={PROFILE.github} target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span><span class="sr-only"> (opens in new tab)</span></a></li>
+                    <li><a class="text-link" href={PROFILE.phoneHref}>{PROFILE.phone}</a></li>
+                    <li><a class="text-link" href={PROFILE.resume} download="Lingesh_S_Resume.pdf">Download resume (PDF)</a></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <span>© <span data-year>2026</span> Lingesh S</span>
+            <span>Built with Astro, three.js and transformers.js</span>
+        </div>
+    </footer>
+
+    <script>
+        const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const root = document.documentElement;
+
+        /* Header state + scroll progress, one rAF-throttled handler */
+        const header = document.querySelector<HTMLElement>('.site-header');
+        const bar = document.querySelector<HTMLElement>('.progress span');
+        let queued = false;
+        const onScroll = () => {
+            queued = false;
+            const max = root.scrollHeight - window.innerHeight;
+            header?.classList.toggle('is-scrolled', window.scrollY > 10);
+            if (bar) bar.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
+        };
+        window.addEventListener('scroll', () => {
+            if (!queued) {
+                queued = true;
+                requestAnimationFrame(onScroll);
+            }
+        }, { passive: true });
+        onScroll();
+
+        /* Nav: a single pill slides to the section in view */
+        const indicator = document.querySelector<HTMLElement>('.nav-indicator');
+        const links = new Map([...document.querySelectorAll<HTMLAnchorElement>('.nav-links a')].map((a) => [a.hash.slice(1), a]));
+        const moveIndicator = (link?: HTMLAnchorElement) => {
+            if (!indicator) return;
+            if (!link) {
+                indicator.style.opacity = '0';
+                return;
+            }
+            indicator.style.width = `${link.offsetWidth}px`;
+            indicator.style.transform = `translateX(${link.parentElement?.offsetLeft ?? 0}px)`;
+            indicator.style.opacity = '1';
+        };
+        const spy = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                links.forEach((a) => a.removeAttribute('aria-current'));
+                const link = links.get(entry.target.id);
+                link?.setAttribute('aria-current', 'true');
+                moveIndicator(link);
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        ['top', ...links.keys()].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) spy.observe(el);
+        });
+
+        /* Reveal on scroll */
+        const revealer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                revealer.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        document.querySelectorAll('.reveal, .section-head').forEach((el) => revealer.observe(el));
+
+        /* Count-up numbers */
+        const counter = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                counter.unobserve(entry.target);
+                const el = entry.target as HTMLElement;
+                const target = Number(el.dataset.count);
+                if (reduced()) return;
+                const start = performance.now();
+                const tick = (now: number) => {
+                    const t = Math.min((now - start) / 1400, 1);
+                    el.textContent = String(Math.round(target * (1 - Math.pow(1 - t, 3))));
+                    if (t < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('[data-count]').forEach((el) => counter.observe(el));
+
+        /* Rotating words in the hero */
+        const windowEl = document.querySelector<HTMLElement>('.rotator-window');
+        if (windowEl && !reduced()) {
+            const words: string[] = JSON.parse(windowEl.dataset.words || '[]');
+            let index = 0;
+            setInterval(() => {
+                if (document.hidden) return;
+                // Drop any word still leaving (animations pause in background tabs)
+                windowEl.querySelectorAll('.rotator-word.is-out').forEach((w) => w.remove());
+                const current = windowEl.querySelector('.rotator-word');
+                index = (index + 1) % words.length;
+                const next = document.createElement('span');
+                next.className = 'rotator-word is-in';
+                next.textContent = words[index];
+                if (current) {
+                    current.classList.remove('is-in');
+                    current.classList.add('is-out');
+                    setTimeout(() => current.remove(), 700);
+                }
+                windowEl.append(next);
+            }, 2600);
+        }
+
+        /* Case studies: animated open / close, demos mount on first open */
+        const DARK = new Set(['codebase', 'noteninja']);
+        const mounted = new WeakSet<Element>();
+        async function mountDemo(details: HTMLDetailsElement) {
+            const name = details.dataset.demo;
+            const host = details.querySelector('[data-demo-host]');
+            if (!name || !host || mounted.has(host)) return;
+            mounted.add(host);
+            const el = document.createElement('div');
+            el.className = `pv ${DARK.has(name) ? 'pv-dark' : 'pv-light'}`;
+            el.dataset.preview = name;
+            el.setAttribute('role', 'region');
+            el.setAttribute('aria-label', `Interactive demo of ${details.dataset.title} (illustrative)`);
+            host.append(el);
+            const { mountPreview } = await import('../previews/previews.js');
+            const demo = mountPreview(el, name);
+            const io = new IntersectionObserver(([entry]) => {
+                if (!entry.isIntersecting) return;
+                io.disconnect();
+                demo?.play();
+            }, { threshold: 0.3 });
+            io.observe(el);
+        }
+
+        function setOpen(details: HTMLDetailsElement, open: boolean) {
+            const body = details.querySelector<HTMLElement>('.case-body');
+            if (!body || reduced()) {
+                details.open = open;
+                if (open) mountDemo(details);
+                return;
+            }
+            body.getAnimations().forEach((a) => a.cancel());
+            if (open) {
+                details.open = true;
+                mountDemo(details);
+                const height = body.scrollHeight;
+                body.animate([{ height: '0px', opacity: 0 }, { height: `${height}px`, opacity: 1 }], { duration: 550, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+            } else {
+                const height = body.scrollHeight;
+                const anim = body.animate([{ height: `${height}px`, opacity: 1 }, { height: '0px', opacity: 0 }], { duration: 380, easing: 'cubic-bezier(.4, 0, .2, 1)' });
+                anim.onfinish = () => { details.open = false; };
+            }
+        }
+
+        document.querySelectorAll<HTMLDetailsElement>('details.case').forEach((details) => {
+            if (details.open) mountDemo(details);
+            details.querySelector('summary')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                setOpen(details, !details.open);
+            });
+        });
+
+        /* Cursor spotlight on cards */
+        if (window.matchMedia('(hover: hover)').matches) {
+            document.addEventListener('pointermove', (e) => {
+                const card = (e.target as Element).closest<HTMLElement>('.card');
+                if (!card) return;
+                const r = card.getBoundingClientRect();
+                card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+                card.style.setProperty('--my', `${e.clientY - r.top}px`);
+            }, { passive: true });
+        }
+
+        /* "Read more" in the 3D space scrolls to the matching part of the page */
+        document.addEventListener('portfolio:reveal', (event) => {
+            const id = (event as CustomEvent<string>).detail;
+            const el = document.getElementById(`item-${id}`);
+            if (!el) return;
+            if (el instanceof HTMLDetailsElement && !el.open) setOpen(el, true);
+            el.classList.add('is-in');
+            el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+            el.classList.remove('flash');
+            void el.offsetWidth;
+            el.classList.add('flash');
+            const focusTarget = el instanceof HTMLDetailsElement ? el.querySelector('summary') : el;
+            if (!(el instanceof HTMLDetailsElement)) el.setAttribute('tabindex', '-1');
+            (focusTarget as HTMLElement | null)?.focus({ preventScroll: true });
+        });
+
+        document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });
+    </script>
+</body>
+</html>
