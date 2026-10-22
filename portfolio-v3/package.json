@@ -1,0 +1,31 @@
+{
+  "name": "lingesh-portfolio-v3",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "space": "node scripts/build-space.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "4.4.2",
+    "@huggingface/transformers": "3.8.1",
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.2",
+    "astro": "5.18.2",
+    "camera-controls": "3.1.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.186.1",
+    "zustand": "5.0.16"
+  },
+  "devDependencies": {
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/three": "0.186.0",
+    "typescript": "5.9.3",
+    "umap-js": "1.4.0"
+  }
+}
