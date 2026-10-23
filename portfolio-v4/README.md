@@ -38,12 +38,9 @@ Then open http://localhost:5540.
 
 No build command. Set the publish directory to `portfolio-v4` (in the root `netlify.toml`: `publish = "portfolio-v4"`).
 
-## Photo credits
+## Photo
 
-From Wikimedia Commons:
-
-- Normal posteroanterior (PA) chest radiograph, by Mikael Häggström, CC0
-- Sathyabama Administration building, by Sathyabama University, CC BY-SA 3.0
+The chest X-ray in the LungAI card is "Normal posteroanterior (PA) chest radiograph" by Mikael Häggström on Wikimedia Commons, released under CC0 (no credit required).
 
 ## Sample content
 
