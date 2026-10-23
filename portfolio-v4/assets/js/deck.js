@@ -1,60 +1,70 @@
-// The hero deck: three sample statements stacked in 3D. The front one tags
-// itself line by line with public IFRS concept names; the tabs bring another
-// statement to the front.
+// The hero deck: three skill groups stacked in 3D. The front card loads its
+// skills line by line; the tabs bring another group to the front.
 
-const STATEMENTS = {
-    pl: {
-        title: 'Statement of profit or loss',
+const LEVELS = {
+    prod: ['Production', 'lv-prod'],
+    research: ['Research', 'lv-research'],
+    intern: ['Internship', 'lv-other'],
+    proj: ['Projects', 'lv-other']
+};
+
+const GROUPS = {
+    genai: {
+        title: 'GenAI and LLMs',
         rows: [
-            ['Revenue', '4,250', 'Revenue', 0.99],
-            ['Cost of sales', '(2,810)', 'CostOfSales', 0.98],
-            ['Gross profit', '1,440', 'GrossProfit', 0.99, true],
-            ['Administrative expenses', '(705)', 'AdministrativeExpense', 0.96],
-            ['Profit before tax', '735', 'ProfitLossBeforeTax', 0.98, true],
-            ['Income tax expense', '(154)', 'IncomeTaxExpenseContinuingOperations', 0.94],
-            ['Profit for the year', '581', 'ProfitLoss', 0.99, true]
+            ['RAG systems', 'prod', 'Haystack · LangChain'],
+            ['Large language models', 'proj', 'Mistral-7B · Flan-T5 · Titan'],
+            ['Fine-tuning', 'proj', 'LoRA · PEFT · Hugging Face'],
+            ['Multi-agent systems', 'proj', 'LangGraph'],
+            ['Vector search', 'proj', 'ChromaDB · FAISS'],
+            ['Prompt engineering', 'intern', 'LLM evaluation'],
+            ['Cloud GenAI', 'proj', 'AWS Bedrock']
         ]
     },
-    fp: {
-        title: 'Statement of financial position',
+    ml: {
+        title: 'Machine learning and NLP',
         rows: [
-            ['Property, plant and equipment', '3,120', 'PropertyPlantAndEquipment', 0.98],
-            ['Trade receivables', '1,280', 'TradeAndOtherCurrentReceivables', 0.95],
-            ['Cash and cash equivalents', '760', 'CashAndCashEquivalents', 0.99],
-            ['Total assets', '5,160', 'Assets', 0.98, true],
-            ['Trade payables', '(1,150)', 'TradeAndOtherCurrentPayables', 0.95],
-            ['Borrowings', '(1,900)', 'Borrowings', 0.96],
-            ['Total equity', '2,110', 'Equity', 0.97, true]
+            ['Sequence models', 'prod', 'LSTM'],
+            ['Entity extraction', 'prod', 'NER'],
+            ['Financial tagging', 'prod', 'XBRL taxonomies'],
+            ['Deep learning', 'proj', 'PyTorch · TensorFlow · Keras'],
+            ['Transformers', 'proj', 'Hugging Face · SentenceTransformers'],
+            ['Classical ML', 'intern', 'Scikit-learn · NLTK · spaCy'],
+            ['Topic modeling', 'research', 'LDA · Gensim · TF-IDF']
         ]
     },
-    cf: {
-        title: 'Statement of cash flows',
+    ops: {
+        title: 'MLOps and data',
         rows: [
-            ['Profit for the year', '581', 'ProfitLoss', 0.99],
-            ['Depreciation', '410', 'DepreciationAndAmortisationExpense', 0.93],
-            ['Income taxes paid', '(148)', 'IncomeTaxesPaidRefundClassifiedAsOperatingActivities', 0.92],
-            ['Cash from operations', '843', 'CashFlowsFromUsedInOperatingActivities', 0.97, true],
-            ['Purchase of equipment', '(520)', 'PurchaseOfPropertyPlantAndEquipmentClassifiedAsInvestingActivities', 0.94],
-            ['Repayment of borrowings', '(200)', 'RepaymentsOfBorrowingsClassifiedAsFinancingActivities', 0.93],
-            ['Net increase in cash', '123', 'IncreaseDecreaseInCashAndCashEquivalents', 0.95, true]
+            ['Model serving', 'prod', 'FastAPI · REST APIs'],
+            ['Containers', 'prod', 'Docker'],
+            ['Messaging', 'prod', 'RabbitMQ'],
+            ['Monitoring', 'prod', 'Grafana · Prometheus'],
+            ['Cloud', 'proj', 'AWS S3 · EC2 · SageMaker'],
+            ['Data processing', 'proj', 'Python · SQL · Pandas · PySpark'],
+            ['Dashboards', 'proj', 'Streamlit · Power BI']
         ]
     }
 };
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const countHtml = (done, total) => (done === total ? `<b>${total}</b> skills` : `<b>${done}</b> of ${total}`);
 
-function cardHtml(key, tagged) {
-    const s = STATEMENTS[key];
-    const rows = s.rows.map(([label, amt, concept, conf, total]) => `
-        <li><button type="button" class="dc-row${total ? ' is-total' : ''}${tagged ? ' is-tagged' : ''}" title="ifrs-full:${concept} · ${conf.toFixed(2)}" data-concept="${concept}" data-conf="${conf}">
-            <span class="dc-label">${esc(label)}</span>
-            <span class="dc-amt">${esc(amt)}</span>
-            <span class="dc-concept"><i>ifrs-full:</i>${esc(concept)}</span>
-        </button></li>`).join('');
+function cardHtml(key, loaded) {
+    const g = GROUPS[key];
+    const rows = g.rows.map(([skill, level, tools]) => {
+        const [levelText, levelClass] = LEVELS[level];
+        return `
+        <li><button type="button" class="dc-row${loaded ? ' is-loaded' : ''}" data-level="${levelText}">
+            <span class="dc-label">${esc(skill)}</span>
+            <span class="dc-level ${levelClass}">${levelText}</span>
+            <span class="dc-tools">${esc(tools)}</span>
+        </button></li>`;
+    }).join('');
     return `
         <div class="dc-head">
-            <p class="dc-title">${s.title}</p>
-            <p class="dc-count"><b>${tagged ? s.rows.length : 0}</b> of ${s.rows.length} tagged</p>
+            <p class="dc-title">${g.title}</p>
+            <p class="dc-count">${countHtml(loaded ? g.rows.length : 0, g.rows.length)}</p>
         </div>
         <ul class="dc-rows">${rows}</ul>`;
 }
@@ -63,7 +73,7 @@ export function initDeck(root, { reduceMotion }) {
     if (!root) return;
     const holder = root.querySelector('.deck-cards');
     const tabs = [...root.querySelectorAll('[role="tab"]')];
-    const order = ['pl', 'fp', 'cf'];
+    const order = ['genai', 'ml', 'ops'];
     const wait = (ms) => new Promise((r) => setTimeout(r, reduceMotion.matches ? 0 : ms));
     let run = 0;
 
@@ -75,7 +85,7 @@ export function initDeck(root, { reduceMotion }) {
         card.id = `deck-${key}`;
         card.setAttribute('role', 'tabpanel');
         card.setAttribute('aria-labelledby', `deck-tab-${key}`);
-        card.innerHTML = cardHtml(key, key !== 'pl');
+        card.innerHTML = cardHtml(key, key !== order[0]);
         holder.append(card);
         cards[key] = card;
     });
@@ -91,22 +101,22 @@ export function initDeck(root, { reduceMotion }) {
     }
     place();
 
-    async function tag(key) {
+    async function load(key) {
         const t = ++run;
         const card = cards[key];
         const rows = [...card.querySelectorAll('.dc-row')];
-        const count = card.querySelector('.dc-count b');
-        rows.forEach((r) => r.classList.remove('is-tagged', 'is-selected'));
-        count.textContent = '0';
-        await wait(reduceMotion.matches ? 0 : 450);
+        const count = card.querySelector('.dc-count');
+        rows.forEach((r) => r.classList.remove('is-loaded', 'is-selected'));
+        count.innerHTML = countHtml(0, rows.length);
+        await wait(450);
         for (let i = 0; i < rows.length; i++) {
             if (t !== run) return;
             rows[i].classList.add('is-scanning');
-            await wait(200);
+            await wait(180);
             if (t !== run) return;
             rows[i].classList.remove('is-scanning');
-            rows[i].classList.add('is-tagged');
-            count.textContent = String(i + 1);
+            rows[i].classList.add('is-loaded');
+            count.innerHTML = countHtml(i + 1, rows.length);
         }
     }
 
@@ -120,7 +130,7 @@ export function initDeck(root, { reduceMotion }) {
         if (stackOrder[0] === key) return;
         stackOrder = [key, ...stackOrder.filter((k) => k !== key)];
         place();
-        tag(key);
+        load(key);
     }
 
     tabs.forEach((tab, i) => {
@@ -133,20 +143,20 @@ export function initDeck(root, { reduceMotion }) {
         });
     });
 
-    // A click on a line selects it and reads its concept out
+    // A click on a line selects it and reads it out
     const announce = document.getElementById('announce');
     holder.addEventListener('click', (e) => {
         const row = e.target.closest('.dc-row');
         if (!row) return;
         row.closest('.dc-rows').querySelectorAll('.dc-row').forEach((r) => r.classList.toggle('is-selected', r === row));
-        if (announce) announce.textContent = `${row.querySelector('.dc-label').textContent}: ifrs-full:${row.dataset.concept}, confidence ${row.dataset.conf}`;
+        if (announce) announce.textContent = `${row.querySelector('.dc-label').textContent}: ${row.querySelector('.dc-tools').textContent}. ${row.dataset.level}.`;
     });
 
-    // The front statement tags itself once the deck is on screen
+    // The front group loads once the deck is on screen
     const io = new IntersectionObserver(([entry]) => {
         if (!entry.isIntersecting) return;
         io.disconnect();
-        setTimeout(() => tag(stackOrder[0]), reduceMotion.matches ? 0 : 500);
+        setTimeout(() => load(stackOrder[0]), reduceMotion.matches ? 0 : 500);
     }, { threshold: 0.3 });
     io.observe(root);
 }

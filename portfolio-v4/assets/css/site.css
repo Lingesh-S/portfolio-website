@@ -280,7 +280,7 @@ button { cursor: pointer; }
 }
 @keyframes floor-move { from { transform: rotateX(68deg) translateY(0); } to { transform: rotateX(68deg) translateY(72px); } }
 
-/* The statement deck: three sheets in 3D, the front one tags itself */
+/* The skills deck: three groups in 3D, the front one loads line by line */
 .deck { grid-column: 6 / 13; display: grid; gap: 14px; }
 .deck-tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-self: end; padding: 4px; border: 1px solid var(--line); border-radius: 999px; background: rgba(15, 26, 22, .7); }
 .deck-tabs button { min-height: 38px; padding: 0 14px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-2); font-size: .9375rem; font-weight: 560; transition: background-color .35s ease, color .35s ease, box-shadow .35s ease; }
@@ -321,7 +321,7 @@ button { cursor: pointer; }
 .dc-row {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(0, 1.2fr) 4.6em minmax(0, 1.5fr);
+    grid-template-columns: minmax(0, 1.1fr) 6.6em minmax(0, 1.3fr);
     align-items: center;
     gap: 12px;
     width: 100%;
@@ -336,14 +336,14 @@ button { cursor: pointer; }
     transition: background-color .3s ease;
 }
 .dc-row:hover, .dc-row.is-selected { background: rgba(52, 224, 161, .09); }
-.dc-row.is-total .dc-label { font-weight: 680; }
-.dc-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dc-amt { position: relative; isolation: isolate; justify-self: end; padding: 1px 7px; font-weight: 600; }
-.dc-amt::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: 6px; background: var(--accent-deep); box-shadow: inset 0 0 0 1px rgba(52, 224, 161, .35); transform: scaleX(0); transform-origin: right; transition: transform .5s var(--ease-out); }
-.dc-concept { overflow: hidden; color: var(--accent-2); font-size: .8125rem; font-stretch: 90%; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; opacity: 0; transform: translateX(-10px); transition: opacity .4s ease, transform .5s var(--ease-out); }
-.dc-concept i { color: var(--ink-3); font-style: normal; font-weight: 500; }
-.dc-row.is-tagged .dc-amt::before { transform: scaleX(1); }
-.dc-row.is-tagged .dc-concept { opacity: 1; transform: none; }
+.dc-label { overflow: hidden; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.dc-level { justify-self: center; padding: 3px 10px; border-radius: 999px; font-size: .75rem; font-weight: 650; white-space: nowrap; opacity: 0; transform: scale(.7); transition: opacity .35s ease, transform .5s var(--ease-out); }
+.lv-prod { background: var(--accent-deep); box-shadow: inset 0 0 0 1px rgba(52, 224, 161, .45); color: var(--accent-2); }
+.lv-research { box-shadow: inset 0 0 0 1px rgba(52, 224, 161, .45); color: var(--accent-2); }
+.lv-other { background: rgba(232, 239, 234, .06); box-shadow: inset 0 0 0 1px var(--line-2); color: var(--ink-2); }
+.dc-tools { overflow: hidden; color: var(--ink-2); font-size: .875rem; text-align: right; text-overflow: ellipsis; white-space: nowrap; opacity: 0; transform: translateX(10px); transition: opacity .4s ease .05s, transform .5s var(--ease-out) .05s; }
+.dc-row.is-loaded .dc-level, .dc-row.is-loaded .dc-tools { opacity: 1; transform: none; }
+.dc-row:hover .dc-tools, .dc-row.is-selected .dc-tools { color: var(--ink); }
 .dc-row::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(52, 224, 161, .22), transparent); transform: translateX(-100%); pointer-events: none; }
 .dc-row.is-scanning::after { animation: sweep .5s var(--ease-in-out) forwards; }
 @keyframes sweep { to { transform: translateX(100%); } }
@@ -618,7 +618,8 @@ button { cursor: pointer; }
     .dcard[data-pos="1"] { --x: 12px; --y: -18px; }
     .dcard[data-pos="2"] { --x: 24px; --y: -36px; }
     .dc-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; font-size: .875rem; }
-    .dc-concept { grid-column: 1 / -1; }
+    .dc-level { justify-self: end; }
+    .dc-tools { grid-column: 1 / -1; text-align: left; white-space: normal; }
     .fig-grid { grid-template-columns: 1fr; gap: 12px; }
     .fig { grid-template-columns: 64px minmax(0, 1fr); align-items: center; gap: 16px; padding: 18px 20px; }
     .pipe-steps li { grid-template-columns: 22px minmax(0, 1fr); padding-right: 0; }
