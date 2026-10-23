@@ -1,29 +1,28 @@
 # Lingesh S · Portfolio v4
 
-A single-page portfolio built around the work I do every day: tagging financial statements with XBRL concepts. The page is designed like an annual report on a dark ledger-green ground, with one red-ink accent, and every figure on it is shown as a tagged fact.
+A single-page portfolio in dark emerald, built in layers: each section is a sheet that rises over the last, cards catch the light and tilt under the pointer, and the hero holds a 3D deck of sample financial statements that tag themselves with XBRL concepts, the way my production models do.
 
 ## What is on the page
 
-- **Live statement (hero):** a sample statement of profit or loss, financial position or cash flows tags itself line by line with public IFRS concept names. Click a line to see its NER tokens, or type your own line ("Trade receivables 1,200") and a small in-browser keyword stand-in tags it.
-- **The work, in figures:** systems in production, taxonomy pipelines shipped, roles, published papers.
-- **XBRL auto-tagging engine:** one line ("Revenue 4,250") travels through the pipeline as you scroll: statements, pre-processing, LSTM + NER, one pipeline per taxonomy, FastAPI in Docker, tagged in the product.
-- **RAG next-word prediction:** a working editor demo with ghost-text suggestions (Tab to accept).
-- **Projects:** nine projects with working demos or pictures (Bedrock RAG, Codebase RAG, NoteNinja, LDA resume screening, multi-agent blog generator, MCQ LoRA, Tamil fine-tuning, LungAI, car sales analytics).
-- **Experience, skills (as a taxonomy), research and education, contact.**
+- **Hero:** name, one line, and a 3D deck of three statements (profit or loss, financial position, cash flows). The front statement tags itself line by line; the tabs bring another one to the front.
+- **Figures:** systems in production, taxonomy pipelines shipped, projects, published paper.
+- **Production work:** the XBRL auto-tagging engine with an animated pipeline, and RAG next-word prediction with a working editor demo (Tab to accept).
+- **Selected projects:** six project cards that stack as you scroll, each with a working demo or an app mock-up, plus three smaller projects.
+- **Experience** (a timeline that draws as you scroll), **skills**, **research and education**, **contact**.
 
 ## Stack
 
-Plain HTML, CSS and JavaScript modules, with no build step and no dependencies. The only external request is the Archivo typeface from Google Fonts.
+Plain HTML, CSS and JavaScript modules, with no build step and no dependencies. The only external request is the Archivo typeface from Google Fonts. Motion uses transforms and opacity, pauses off screen, and switches off for visitors who prefer reduced motion.
 
 ```
 portfolio-v4/
   index.html              all content (readable without JavaScript)
-  assets/css/site.css     layout, type, colour, motion
+  assets/css/site.css     layout, type, colour, depth, motion
   assets/css/demos.css    the project demos
-  assets/js/site.js       bar, entrances, pipeline scene, project tabs
-  assets/js/tagger.js     the live statement in the hero
+  assets/js/site.js       entrances, scroll effects, tilt, light, demos
+  assets/js/deck.js       the 3D statement deck in the hero
   assets/js/demos.js      the project demos (loaded when first needed)
-  assets/img/             pictures (WebP)
+  assets/img/             photos (WebP)
   Lingesh_Resume.pdf
 ```
 
@@ -39,15 +38,13 @@ Then open http://localhost:5540.
 
 No build command. Set the publish directory to `portfolio-v4` (in the root `netlify.toml`: `publish = "portfolio-v4"`).
 
-## Picture credits
+## Photo credits
 
-All from Wikimedia Commons:
+From Wikimedia Commons:
 
-- Ledger of the fur trader Dedo from Leipzig, 1876–1885 (page 3), public domain
-- Palm-leaf manuscript of Tamil literature, U. V. Swaminatha Iyer Library (UVSL 589), photo by Ms Sarah Welch, CC BY-SA 4.0
 - Normal posteroanterior (PA) chest radiograph, by Mikael Häggström, CC0
 - Sathyabama Administration building, by Sathyabama University, CC BY-SA 3.0
 
 ## Sample content
 
-The statements, figures and taxonomy concepts in the hero and the pipeline are samples using public taxonomy names; the production models and data are DataTracks' own. The car sales dashboard numbers, the MCQ example and the blog-agent topic are illustrative.
+The statement figures in the hero and the pipeline are samples with public IFRS concept names; the production models and data are DataTracks' own. The blog-agent run and the MCQ example are illustrative.

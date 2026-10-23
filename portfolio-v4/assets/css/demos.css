@@ -19,7 +19,8 @@
     font-stretch: 100%;
     font-variant-numeric: tabular-nums;
 }
-.projects .pv { --pv-bg: var(--ground); --pv-soft: var(--raised); --pv-deep: #070c0a; --pv-hi: #1d2c26; }
+.pcard .pv, .feature .pv { --pv-bg: #0b1512; --pv-soft: #13221c; --pv-deep: #070d0b; --pv-hi: #1c3029; box-shadow: inset 0 0 0 1px var(--line); }
+.pv :where(.pv-bubble, .step, .src, .cb-snippet, .ld-file, .nn-field, .ag-lane, .mcq-in, .mcq-opts li, .mcq-cfg div, .cs-kpis div, .nw-rb, .nw-font, .nw-lat, .nw-accept, .ld-role, .nn-note, .pv-avatar, .nn-logo, .cb-tree li) { border-radius: 8px; }
 .pv:empty::before { content: 'The working demo loads with JavaScript.'; margin: auto; color: var(--pv-muted); }
 .pv :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .pv h4 { margin: 0; font-size: 15px; font-stretch: 90%; font-weight: 650; letter-spacing: -0.01em; }
@@ -44,8 +45,9 @@
     align-items: center;
     gap: 6px;
     min-height: 32px;
-    padding: 5px 11px;
+    padding: 5px 12px;
     border: 0;
+    border-radius: 999px;
     background: var(--pv-soft);
     color: var(--pv-fg);
     font-size: 13px;
@@ -140,7 +142,7 @@
 .cb-snippet-head { display: flex; justify-content: space-between; gap: 8px; padding: 6px 10px; background: var(--pv-soft); color: var(--pv-muted); font-size: 12px; }
 .cb-snippet-head b { overflow: hidden; color: var(--pv-fg); font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
 .cb-snippet pre { margin: 0; padding: 10px 12px; overflow-x: auto; color: #d8dccf; font: 12px/1.6 var(--mono); scrollbar-width: thin; }
-.tk-kw { color: #ff9a76; }
+.tk-kw { color: #7ee0b5; }
 .tk-fn { color: #e9d38c; }
 .tk-str { color: #9fd8a8; }
 .tk-self, .tk-num { color: #f2b880; }
@@ -163,6 +165,7 @@
     flex-direction: column;
     gap: 8px;
     padding: 26px 30px;
+    border-radius: 10px;
     background: var(--ink);
     color: #1d221f;
     transition: outline-color .2s ease;
@@ -187,13 +190,14 @@
     word-break: normal;
 }
 .nw-ghost { overflow: hidden; color: transparent; pointer-events: none; }
-.nw-suggest { color: #8a6b5f; }
+.nw-suggest { color: #4f8a72; }
 .nw-suggest:not(:empty)::after {
     content: 'Tab';
     margin-left: 6px;
     padding: 0 5px;
-    background: #d9d2c2;
-    color: #4b524d;
+    border-radius: 4px;
+    background: #cfe6da;
+    color: #2d4a3e;
     font: 600 10px/1.7 var(--font);
     vertical-align: 2px;
 }

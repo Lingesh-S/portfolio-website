@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lingesh S · Data Scientist</title>
-    <meta name="description" content="Lingesh S, data scientist at DataTracks. Production ML and GenAI: XBRL auto-tagging with LSTM and NER, RAG systems, LLM fine-tuning.">
-    <meta name="theme-color" content="#0b120f">
+    <meta name="description" content="Lingesh S, data scientist at DataTracks. Production ML and GenAI: XBRL auto-tagging, RAG systems and LLM fine-tuning.">
+    <meta name="theme-color" content="#070d0b">
     <meta property="og:title" content="Lingesh S · Data Scientist">
-    <meta property="og:description" content="Production ML and GenAI: XBRL auto-tagging, RAG systems, LLM fine-tuning.">
+    <meta property="og:description" content="Production ML and GenAI: XBRL auto-tagging, RAG systems and LLM fine-tuning.">
     <meta property="og:type" content="website">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,18 +20,20 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+<div class="ambient" aria-hidden="true"><span></span><span></span></div>
 
 <header class="bar" id="top">
     <div class="wrap bar-inner">
-        <a class="wordmark" href="#top" aria-label="Lingesh S, back to top">Lingesh S</a>
+        <a class="wordmark" href="#top" aria-label="Lingesh S, back to top"><span class="wordmark-dot" aria-hidden="true"></span>Lingesh S</a>
         <nav class="bar-nav" aria-label="Sections">
             <a href="#work">Work</a>
             <a href="#projects">Projects</a>
             <a href="#experience">Experience</a>
             <a href="#skills">Skills</a>
             <a href="#research">Research</a>
+            <span class="nav-pill" aria-hidden="true"></span>
         </nav>
-        <a class="btn btn-accent bar-cta" href="#contact"><span>Contact</span></a>
+        <a class="btn btn-accent btn-sm bar-cta" href="#contact" data-magnetic><span>Contact</span></a>
         <button class="bar-menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
     </div>
     <nav class="menu" id="menu" aria-label="Sections" hidden>
@@ -42,651 +44,373 @@
         <a href="#research">Research</a>
         <a href="#contact">Contact</a>
     </nav>
+    <div class="progress" aria-hidden="true"><span></span></div>
 </header>
 
 <main id="main">
 
 <!-- ============================== Hero ============================== -->
 <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
+    <div class="floor" aria-hidden="true"><div class="floor-plane"></div></div>
+    <div class="wrap hero-inner">
         <h1 class="name fit" id="hero-title"><span class="fit-text">Lingesh S</span></h1>
         <div class="hero-grid">
-            <div class="hero-copy" data-reveal>
-                <p class="statement">Data scientist at DataTracks. I build the ML and GenAI systems that read financial statements in production.</p>
-                <div class="actions">
-                    <a class="btn btn-accent" href="mailto:lingeshsrinivasan1@gmail.com?subject=Hello%20Lingesh"><span>Email me</span><svg class="arrow" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4"/></svg></a>
-                    <a class="btn btn-quiet" href="Lingesh_Resume.pdf" download><span>Download résumé</span><svg class="arrow arrow-down" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 4v11m-4-4 4 4 4-4"/></svg></a>
+            <div class="hero-copy">
+                <p class="statement" data-reveal>Data scientist at DataTracks. I build the ML and GenAI systems that read financial statements in production.</p>
+                <div class="actions" data-reveal>
+                    <a class="btn btn-accent" href="mailto:lingeshsrinivasan1@gmail.com?subject=Hello%20Lingesh" data-magnetic><span>Email me</span><svg class="arrow" aria-hidden="true" viewBox="0 0 20 20"><path d="M4 10h11m-4-4 4 4-4 4"/></svg></a>
+                    <a class="btn btn-ghost" href="Lingesh_Resume.pdf" download data-magnetic><span>Download résumé</span><svg class="arrow arrow-down" aria-hidden="true" viewBox="0 0 20 20"><path d="M10 4v11m-4-4 4 4 4-4"/></svg></a>
                 </div>
-                <p class="note hero-note" id="tg-note">The sample statement tags itself the way my production models tag a filing, with public IFRS concept names. Pick a line to see how the model reads it, or tag a line of your own.</p>
+                <ul class="hero-facts" data-reveal>
+                    <li><b>Production ML</b><span>XBRL auto-tagging</span></li>
+                    <li><b>GenAI</b><span>RAG and fine-tuning</span></li>
+                    <li><b>Research</b><span>ICCCAI-2024</span></li>
+                </ul>
             </div>
 
-            <div class="tagger" id="tagger" data-ui data-reveal>
-                <div class="tg-head">
-                    <p class="tg-title" id="tg-title">Statement of profit or loss</p>
-                    <p class="tg-meta"><span class="tg-unit">Sample figures, £000</span><span class="tg-count" aria-live="polite">8 of 8 tagged</span></p>
+            <div class="deck" id="deck" data-reveal>
+                <div class="deck-tabs" role="tablist" aria-label="Sample statements">
+                    <button type="button" role="tab" id="deck-tab-pl" aria-selected="true" aria-controls="deck-pl" data-card="pl">Profit or loss</button>
+                    <button type="button" role="tab" id="deck-tab-fp" aria-selected="false" aria-controls="deck-fp" data-card="fp" tabindex="-1">Financial position</button>
+                    <button type="button" role="tab" id="deck-tab-cf" aria-selected="false" aria-controls="deck-cf" data-card="cf" tabindex="-1">Cash flows</button>
                 </div>
-                <div class="tg-tabs" role="tablist" aria-label="Choose a statement">
-                    <button type="button" role="tab" id="tg-tab-pl" aria-selected="true" data-statement="pl">Profit or loss</button>
-                    <button type="button" role="tab" id="tg-tab-fp" aria-selected="false" data-statement="fp" tabindex="-1">Financial position</button>
-                    <button type="button" role="tab" id="tg-tab-cf" aria-selected="false" data-statement="cf" tabindex="-1">Cash flows</button>
+                <div class="deck-stage">
+                    <div class="deck-cards"></div>
                 </div>
-                <ul class="tg-rows" role="tabpanel" aria-labelledby="tg-tab-pl" aria-describedby="tg-note">
-                    <li><button type="button" class="tg-row is-tagged"><span class="tg-label">Revenue</span><span class="tg-amt">4,250</span><span class="tg-concept"><i>ifrs-full:</i>Revenue</span><span class="tg-conf">99%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged"><span class="tg-label">Cost of sales</span><span class="tg-amt">(2,810)</span><span class="tg-concept"><i>ifrs-full:</i>CostOfSales</span><span class="tg-conf">98%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged is-total"><span class="tg-label">Gross profit</span><span class="tg-amt">1,440</span><span class="tg-concept"><i>ifrs-full:</i>GrossProfit</span><span class="tg-conf">99%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged"><span class="tg-label">Administrative expenses</span><span class="tg-amt">(620)</span><span class="tg-concept"><i>ifrs-full:</i>AdministrativeExpense</span><span class="tg-conf">96%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged"><span class="tg-label">Finance costs</span><span class="tg-amt">(85)</span><span class="tg-concept"><i>ifrs-full:</i>FinanceCosts</span><span class="tg-conf">97%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged is-total"><span class="tg-label">Profit before tax</span><span class="tg-amt">735</span><span class="tg-concept"><i>ifrs-full:</i>ProfitLossBeforeTax</span><span class="tg-conf">98%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged"><span class="tg-label">Income tax expense</span><span class="tg-amt">(154)</span><span class="tg-concept"><i>ifrs-full:</i>IncomeTax<wbr>Expense<wbr>Continuing<wbr>Operations</span><span class="tg-conf">94%</span></button></li>
-                    <li><button type="button" class="tg-row is-tagged is-total"><span class="tg-label">Profit for the year</span><span class="tg-amt">581</span><span class="tg-concept"><i>ifrs-full:</i>ProfitLoss</span><span class="tg-conf">99%</span></button></li>
-                </ul>
-                <div class="tg-tokens" aria-live="polite">
-                    <p class="tg-hint">Pick a line to see its tokens and labels.</p>
-                </div>
-                <form class="tg-form" autocomplete="off">
-                    <label for="tg-input">Tag your own line</label>
-                    <div class="tg-field">
-                        <input id="tg-input" name="line" type="text" maxlength="80" placeholder="Trade receivables 1,200" spellcheck="false">
-                        <button type="submit" class="tg-submit">Tag line</button>
-                    </div>
-                </form>
+                <p class="deck-note">Sample figures, tagged live with public IFRS concepts, the way my models tag a filing.</p>
             </div>
         </div>
     </div>
+    <a class="scroll-cue" href="#figures" aria-label="Scroll to the work"><span></span></a>
 </section>
 
 <!-- ============================== Figures ============================== -->
-<section class="figures" aria-labelledby="figures-title">
+<section class="figures" id="figures" aria-labelledby="figures-title">
     <div class="wrap">
-        <h2 class="h2" id="figures-title" data-reveal>The work, in figures</h2>
+        <h2 class="sr-only" id="figures-title">The work, in figures</h2>
         <dl class="fig-grid">
-            <div class="fig" data-reveal>
+            <div class="fig card lit" data-reveal data-tilt>
                 <dt class="fig-n"><span class="count" data-to="2">2</span></dt>
-                <dd>
-                    <span class="fact-tag">lingesh:<wbr>Systems<wbr>In<wbr>Production</span>
-                    <span class="fig-text">ML systems I run in production at DataTracks: XBRL auto-tagging and next-word prediction.</span>
-                </dd>
+                <dd><span class="fig-tag">Systems in production</span><span class="fig-text">XBRL auto-tagging and next-word prediction at DataTracks.</span></dd>
             </div>
-            <div class="fig" data-reveal>
+            <div class="fig card lit" data-reveal data-tilt>
                 <dt class="fig-n"><span class="count" data-to="2">2</span></dt>
-                <dd>
-                    <span class="fact-tag">lingesh:<wbr>Taxonomy<wbr>Pipelines<wbr>Shipped</span>
-                    <span class="fig-text">New taxonomy pipelines I trained and deployed end to end, from data prep to production.</span>
-                </dd>
+                <dd><span class="fig-tag">Taxonomy pipelines shipped</span><span class="fig-text">Trained and deployed end to end, data prep to production.</span></dd>
             </div>
-            <div class="fig" data-reveal>
-                <dt class="fig-n"><span class="count" data-to="3">3</span></dt>
-                <dd>
-                    <span class="fact-tag">lingesh:<wbr>Roles<wbr>Held</span>
-                    <span class="fig-text">Roles since June 2024, from classical NLP to LLMs to production ML.</span>
-                </dd>
+            <div class="fig card lit" data-reveal data-tilt>
+                <dt class="fig-n"><span class="count" data-to="9">9</span></dt>
+                <dd><span class="fig-tag">GenAI and ML projects</span><span class="fig-text">RAG assistants, agents, LoRA fine-tuning and more.</span></dd>
             </div>
-            <div class="fig" data-reveal>
+            <div class="fig card lit" data-reveal data-tilt>
                 <dt class="fig-n"><span class="count" data-to="1">1</span></dt>
-                <dd>
-                    <span class="fact-tag">lingesh:<wbr>Papers<wbr>Published</span>
-                    <span class="fig-text">Paper published and presented at ICCCAI-2024, Taylor’s University, Malaysia.</span>
-                </dd>
+                <dd><span class="fig-tag">Published paper</span><span class="fig-text">ICCCAI-2024, Taylor’s University, Malaysia.</span></dd>
             </div>
         </dl>
     </div>
 </section>
 
-<!-- ============================== XBRL case ============================== -->
-<section class="case case-xbrl" id="work" aria-labelledby="xbrl-title">
+<!-- ============================== Production work ============================== -->
+<section class="sheet work" id="work" aria-labelledby="work-title">
     <div class="wrap">
-        <header class="case-head" data-reveal>
-            <h2 class="h2" id="xbrl-title">XBRL auto-tagging engine</h2>
-            <p class="statement">Every figure in a regulatory filing needs the right concept from a taxonomy. My LSTM + NER models tag them, taxonomy by taxonomy, in production.</p>
-            <p class="case-meta">In production at DataTracks, July 2025 to now</p>
+        <header class="section-head">
+            <h2 class="h2" id="work-title" data-split>Production work</h2>
+            <p class="lede" data-reveal>Two systems I build and run at DataTracks, used every day inside the product.</p>
         </header>
-    </div>
 
-    <div class="scene" id="pipeline" style="--stages: 6">
-        <div class="scene-frame">
-            <div class="wrap scene-inner">
-                <ol class="scene-progress" aria-label="Pipeline stages"></ol>
-                <div class="stages">
-                    <article class="stage" data-stage="0">
-                        <div class="stage-copy">
-                            <h3 class="h3">Financial statements</h3>
-                            <p>A filing arrives as pages of line items and figures. Every figure has to be found before it can be tagged, and a long annual report holds thousands.</p>
-                        </div>
-                        <figure class="stage-art art-ledger">
-                            <div class="ledger">
-                                <img src="assets/img/ledger-1886.webp" width="1669" height="1335" alt="An open handwritten ledger with debit and credit columns of figures, ruled in red ink." loading="lazy" decoding="async">
-                                <div class="ledger-boxes" aria-hidden="true">
-                                    <span style="--x:41.5;--y:6.9;--w:7.4;--h:3.4"></span>
-                                    <span style="--x:41.5;--y:14.6;--w:6.2;--h:2.8"></span>
-                                    <span style="--x:41.5;--y:20.3;--w:6.4;--h:2.8"></span>
-                                    <span style="--x:41.5;--y:27.5;--w:6.6;--h:2.8"></span>
-                                    <span style="--x:41.5;--y:35.6;--w:7.4;--h:3.2"></span>
-                                    <span style="--x:41.5;--y:38.6;--w:6.4;--h:2.8"></span>
-                                    <span style="--x:41.5;--y:41.3;--w:6.4;--h:2.8"></span>
-                                    <span style="--x:88.5;--y:5.6;--w:7.6;--h:2.8"></span>
-                                    <span style="--x:88.5;--y:14.6;--w:7.6;--h:2.8"></span>
-                                    <span style="--x:88.5;--y:21.6;--w:7.6;--h:2.8"></span>
-                                    <span style="--x:88.5;--y:25.6;--w:7.6;--h:2.8"></span>
-                                    <span style="--x:88.5;--y:39.8;--w:7.6;--h:2.8"></span>
-                                </div>
-                            </div>
-                            <figcaption>A fur trader’s ledger of debits and credits, Leipzig, 1880s.</figcaption>
-                        </figure>
-                    </article>
-
-                    <article class="stage" data-stage="1">
-                        <div class="stage-copy">
-                            <h3 class="h3">Pre-processing</h3>
-                            <p>Each line is cleaned and split into tokens, and its context travels with it: which statement, which period, which unit.</p>
-                        </div>
-                        <div class="stage-art art-tokens" data-ui>
-                            <p class="line-raw"><span>Revenue</span><span>4,250</span></p>
-                            <p class="toks"><span class="tok">Revenue</span><span class="tok">4,250</span></p>
-                            <dl class="ctx">
-                                <div><dt>Statement</dt><dd>Profit or loss</dd></div>
-                                <div><dt>Period</dt><dd>Year to 31 Dec 2025</dd></div>
-                                <div><dt>Unit</dt><dd>GBP, thousands</dd></div>
-                            </dl>
-                        </div>
-                    </article>
-
-                    <article class="stage" data-stage="2">
-                        <div class="stage-copy">
-                            <h3 class="h3">LSTM + NER model</h3>
-                            <p>A sequence model labels the tokens: where a line item begins, which words continue it, and which token is the value.</p>
-                        </div>
-                        <div class="stage-art art-ner" data-ui>
-                            <p class="toks"><span class="tok tok-item">Revenue<small>B-ITEM</small></span><span class="tok tok-val">4,250<small>B-VAL</small></span></p>
-                            <p class="toks"><span class="tok tok-item">Cost<small>B-ITEM</small></span><span class="tok tok-item tok-cont">of<small>I-ITEM</small></span><span class="tok tok-item tok-cont">sales<small>I-ITEM</small></span><span class="tok tok-val">(2,810)<small>B-VAL</small></span></p>
-                        </div>
-                    </article>
-
-                    <article class="stage" data-stage="3">
-                        <div class="stage-copy">
-                            <h3 class="h3">One pipeline per taxonomy</h3>
-                            <p>Each region publishes its own taxonomy with its own rules, so each gets an independent pipeline. I trained and shipped two new ones end to end.</p>
-                        </div>
-                        <div class="stage-art art-tax" data-ui>
-                            <p class="tax-line"><span>Revenue</span><span>4,250</span></p>
-                            <ul class="tax-list">
-                                <li><span class="tax-name">IFRS</span><span class="tax-concept"><i>ifrs-full:</i>Revenue</span></li>
-                                <li><span class="tax-name">UK FRS 102</span><span class="tax-concept"><i>core:</i>TurnoverRevenue</span></li>
-                                <li><span class="tax-name">US GAAP</span><span class="tax-concept"><i>us-gaap:</i>Revenues</span></li>
-                            </ul>
-                            <p class="art-note">One line under three public taxonomies.</p>
-                        </div>
-                    </article>
-
-                    <article class="stage" data-stage="4">
-                        <div class="stage-copy">
-                            <h3 class="h3">FastAPI service in Docker</h3>
-                            <p>The models run as FastAPI services in Docker on on-premise servers, answering the product over REST with low latency.</p>
-                        </div>
-                        <div class="stage-art art-api" data-ui>
-                            <p class="api-req">POST /tag</p>
-<pre><code>{
-  "line": "Revenue",
-  "value": 4250000,
-  "unit": "GBP",
-  "period": "2025-01-01/2025-12-31",
-  "concept": "ifrs-full:Revenue",
-  "confidence": 0.99
-}</code></pre>
-                        </div>
-                    </article>
-
-                    <article class="stage" data-stage="5">
-                        <div class="stage-copy">
-                            <h3 class="h3">Tagged in the product</h3>
-                            <p>The tag lands on the figure inside the compliance product, and Grafana and Prometheus watch every service that put it there.</p>
-                        </div>
-                        <div class="stage-art art-product" data-ui>
-                            <ul class="doc">
-                                <li class="doc-row is-hit"><span>Revenue</span><span class="doc-fig"><span class="doc-num">4,250</span><b class="doc-tag"><i>ifrs-full:</i>Revenue · FY2025 · £000</b></span></li>
-                                <li class="doc-row"><span>Cost of sales</span><span class="doc-fig">(2,810)</span></li>
-                                <li class="doc-row"><span>Gross profit</span><span class="doc-fig">1,440</span></li>
-                            </ul>
-                            <p class="doc-watch"><span class="live-dot" aria-hidden="true"></span>Latency and errors watched in Grafana and Prometheus</p>
-                        </div>
-                    </article>
-                </div>
+        <article class="feature card lit" data-reveal>
+            <div class="feature-copy">
+                <p class="badge"><span class="live-dot" aria-hidden="true"></span>In production</p>
+                <h3 class="h3">XBRL auto-tagging engine</h3>
+                <p>LSTM + NER models that tag every figure in a financial statement with the right XBRL concept, with an independent pipeline for each regional taxonomy.</p>
+                <ul class="chips"><li>LSTM</li><li>NER</li><li>XBRL</li><li>FastAPI</li><li>Docker</li><li>Grafana</li></ul>
             </div>
-        </div>
-    </div>
-
-    <div class="wrap case-foot" data-reveal>
-        <div class="case-built">
-            <h3 class="h3">What I built</h3>
-            <ul class="ticks">
-                <li>LSTM + NER auto-tagging models for multiple region-specific taxonomies across the core compliance products.</li>
-                <li>Independent ML pipelines per taxonomy, and two new taxonomy pipelines trained and deployed end to end, from data prep to production integration.</li>
-                <li>The serving layer: Docker, FastAPI and REST APIs on on-premise infrastructure, built for low-latency inference.</li>
-                <li>Production monitoring and observability for the ML services with Grafana and Prometheus.</li>
-            </ul>
-        </div>
-        <div class="case-side">
-            <h3 class="h3">Stack</h3>
-            <p class="stack">Python, LSTM, NER, XBRL, Docker, FastAPI, REST APIs, Grafana, Prometheus</p>
-            <p class="note">Proprietary work. The figures and concepts on this page are samples with public taxonomy names.</p>
-        </div>
-    </div>
-</section>
-
-<!-- ============================== Next-word case ============================== -->
-<section class="case case-nw" aria-labelledby="nw-title">
-    <div class="wrap">
-        <header class="case-head" data-reveal>
-            <h2 class="h2" id="nw-title">RAG-powered <span class="nowrap">next-word</span> prediction</h2>
-            <p class="statement">Writers in a Word-like editor get the next words as they type, retrieved from domain text and fast enough to keep up.</p>
-            <p class="case-meta">In production at DataTracks, inside a flagship product</p>
-        </header>
-        <div class="nw-grid">
-            <div class="nw-demo" data-reveal>
-                <div class="pv" data-preview="nextword" data-ui></div>
-                <p class="note">Type “The directors have” and press Tab to accept. A small in-browser stand-in that retrieves from sample annual-report sentences.</p>
-            </div>
-            <div class="nw-side" data-reveal>
-                <h3 class="h3">How it works</h3>
-                <ol class="flow">
-                    <li>Editor context</li>
-                    <li>FastAPI and RabbitMQ</li>
-                    <li>Haystack retrieval</li>
-                    <li>Next-word prediction</li>
-                    <li>Inline suggestion</li>
+            <div class="pipeline" data-ui aria-label="How one line of a statement moves through the tagging pipeline">
+                <ol class="pipe-steps">
+                    <li style="--i:0"><b>Statement</b><span>Revenue <em>4,250</em></span></li>
+                    <li style="--i:1"><b>LSTM + NER</b><span>Revenue <em>B-ITEM</em> · 4,250 <em>B-VAL</em></span></li>
+                    <li style="--i:2"><b>Taxonomy pipeline</b><span>IFRS · one pipeline per region</span></li>
+                    <li style="--i:3"><b>FastAPI in Docker</b><span>Low-latency REST service</span></li>
+                    <li style="--i:4"><b>In the product</b><span><em>ifrs-full:Revenue</em> · 0.99</span></li>
                 </ol>
-                <ul class="ticks">
-                    <li>Built with Haystack, FastAPI and RabbitMQ for a real-time, user-facing feature.</li>
-                    <li>Designed for low-latency inference, so suggestions arrive in the rhythm of typing.</li>
-                    <li>Monitored with Grafana and Prometheus, deployed with Docker on-premise.</li>
-                </ul>
+                <span class="pipe-pulse" aria-hidden="true"></span>
             </div>
-        </div>
+        </article>
+
+        <article class="feature feature-flip card lit" data-reveal>
+            <div class="feature-copy">
+                <p class="badge"><span class="live-dot" aria-hidden="true"></span>In production</p>
+                <h3 class="h3">RAG next-word prediction</h3>
+                <p>Suggestions that finish the writer’s sentence inside the product’s editor, retrieved from domain text and fast enough to keep up with typing.</p>
+                <ul class="chips"><li>Haystack</li><li>FastAPI</li><li>RabbitMQ</li><li>Prometheus</li></ul>
+                <p class="hint">Try it: type “The directors have” and press Tab.</p>
+            </div>
+            <div class="feature-demo">
+                <div class="pv" data-preview="nextword" data-ui></div>
+            </div>
+        </article>
     </div>
 </section>
 
 <!-- ============================== Projects ============================== -->
-<section class="projects" id="projects" aria-labelledby="projects-title">
+<section class="sheet projects" id="projects" aria-labelledby="projects-title">
     <div class="wrap">
-        <header class="section-head" data-reveal>
-            <h2 class="h2" id="projects-title">Retrieval, agents, fine-tuning</h2>
-            <p class="statement">Nine projects I designed and built end to end, from RAG assistants to LoRA fine-tuning. Pick one to see it working.</p>
+        <header class="section-head">
+            <h2 class="h2" id="projects-title" data-split>Selected projects</h2>
+            <p class="lede" data-reveal>Retrieval, agents and fine-tuning, each built end to end. The demos run in your browser.</p>
         </header>
 
-        <div class="px">
-            <div class="px-list" role="tablist" aria-label="Projects" aria-orientation="vertical">
-                <button type="button" role="tab" id="tab-bedrock" aria-controls="p-bedrock" aria-selected="true"><b>AWS Bedrock RAG knowledge assistant</b><span>Titan, LangChain, ChromaDB</span></button>
-                <button type="button" role="tab" id="tab-codebase" aria-controls="p-codebase" aria-selected="false" tabindex="-1"><b>Codebase RAG assistant</b><span>Mistral-7B, FAISS, Streamlit</span></button>
-                <button type="button" role="tab" id="tab-noteninja" aria-controls="p-noteninja" aria-selected="false" tabindex="-1"><b>NoteNinja AI learning chatbot</b><span>Flan-T5, LangChain</span></button>
-                <button type="button" role="tab" id="tab-lda" aria-controls="p-lda" aria-selected="false" tabindex="-1"><b>LDA resume screening dashboard</b><span>Published at ICCCAI-2024</span></button>
-                <button type="button" role="tab" id="tab-agents" aria-controls="p-agents" aria-selected="false" tabindex="-1"><b>Multi-agent blog generator</b><span>LangGraph, FastAPI, Ollama</span></button>
-                <button type="button" role="tab" id="tab-mcq" aria-controls="p-mcq" aria-selected="false" tabindex="-1"><b>MCQ generator, Mistral-7B + LoRA</b><span>PEFT, bitsandbytes, Hugging Face</span></button>
-                <button type="button" role="tab" id="tab-tamil" aria-controls="p-tamil" aria-selected="false" tabindex="-1"><b>Fine-tuning LLMs for Tamil stories</b><span>distilgpt2, LoRA</span></button>
-                <button type="button" role="tab" id="tab-lungai" aria-controls="p-lungai" aria-selected="false" tabindex="-1"><b>LungAI chest X-ray classifier</b><span>TensorFlow, Grad-CAM</span></button>
-                <button type="button" role="tab" id="tab-carsales" aria-controls="p-carsales" aria-selected="false" tabindex="-1"><b>Car sales analytics</b><span>Python, SQL, Power BI</span></button>
-            </div>
+        <div class="stack-list">
+            <article class="pcard card" style="--n:0">
+                <div class="pcard-copy">
+                    <h3 class="h3">AWS Bedrock RAG knowledge assistant</h3>
+                    <p>Answers questions from your own documents with Titan on AWS Bedrock, grounded in the sources it retrieves.</p>
+                    <ul class="chips"><li>AWS Bedrock</li><li>Titan</li><li>LangChain</li><li>ChromaDB</li><li>Streamlit</li></ul>
+                    <p class="links"><a class="link" href="https://github.com/Lingesh-S/aws-bedrock-rag-knowledge-assistant" target="_blank" rel="noopener">Source code</a></p>
+                </div>
+                <div class="pcard-demo"><div class="pv" data-preview="bedrock" data-ui></div></div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
 
-            <div class="px-panels">
-                <article class="px-panel" role="tabpanel" id="p-bedrock" aria-labelledby="tab-bedrock">
-                    <div class="pv" data-preview="bedrock" data-ui></div>
-                    <div class="px-text">
-                        <h3 class="h3">AWS Bedrock RAG knowledge assistant</h3>
-                        <p>Retrieval-augmented question answering over your own documents with AWS Bedrock (Titan LLM) and LangChain, so answers come from your sources and not from guesses.</p>
-                        <ul class="ticks">
-                            <li>Ingests, chunks and embeds documents with Amazon Titan Embeddings and stores the vectors in ChromaDB for semantic search.</li>
-                            <li>Grounds every answer in retrieved context, which cuts hallucinations sharply.</li>
-                            <li>Real-time Streamlit interface; now moving storage to S3 and deployment to EC2.</li>
-                        </ul>
-                        <p class="stack">AWS Bedrock, Titan LLM, Titan Embeddings, LangChain, ChromaDB, Streamlit, Python</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/aws-bedrock-rag-knowledge-assistant" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
+            <article class="pcard card" style="--n:1">
+                <div class="pcard-copy">
+                    <h3 class="h3">Codebase RAG assistant</h3>
+                    <p>Ask a codebase questions in plain English. Mistral-7B answers from the source files it retrieves.</p>
+                    <ul class="chips"><li>Mistral-7B</li><li>LangChain</li><li>FAISS</li><li>SentenceTransformers</li></ul>
+                    <p class="note">Private repository, source available on request.</p>
+                </div>
+                <div class="pcard-demo"><div class="pv" data-preview="codebase" data-ui></div></div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
 
-                <article class="px-panel" role="tabpanel" id="p-codebase" aria-labelledby="tab-codebase">
-                    <div class="pv" data-preview="codebase" data-ui></div>
-                    <div class="px-text">
-                        <h3 class="h3">Codebase RAG assistant</h3>
-                        <p>Ask a codebase questions in plain English. Mistral-7B on PyTorch answers from semantic search over the actual source files.</p>
-                        <ul class="ticks">
-                            <li>Loads and chunks .py, .md and .json files, embeds them with SentenceTransformers and stores them in Chroma or FAISS.</li>
-                            <li>A LangChain retriever passes the three closest chunks to Mistral-7B for grounded explanations.</li>
-                            <li>A modular Streamlit assistant for code understanding and developer support.</li>
-                        </ul>
-                        <p class="stack">Mistral-7B, PyTorch, LangChain, SentenceTransformers, ChromaDB, FAISS, Streamlit</p>
-                        <p class="note">The repository is private. Source available on request.</p>
-                    </div>
-                </article>
+            <article class="pcard card" style="--n:2">
+                <div class="pcard-copy">
+                    <h3 class="h3">NoteNinja AI learning chatbot</h3>
+                    <p>A study assistant that answers from a student’s own notes and PDFs, like a private tutor.</p>
+                    <ul class="chips"><li>Flan-T5</li><li>LangChain</li><li>Hugging Face</li><li>Streamlit</li></ul>
+                    <p class="links"><a class="link" href="https://github.com/Lingesh-S/NoteNinja-AI" target="_blank" rel="noopener">Repository</a></p>
+                </div>
+                <div class="pcard-demo"><div class="pv" data-preview="noteninja" data-ui></div></div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
 
-                <article class="px-panel" role="tabpanel" id="p-noteninja" aria-labelledby="tab-noteninja">
-                    <div class="pv" data-preview="noteninja" data-ui></div>
-                    <div class="px-text">
-                        <h3 class="h3">NoteNinja AI learning chatbot</h3>
-                        <p>Students talk to their own lecture notes, PDFs and quizzes, and get answers grounded in their course material, like a private tutor.</p>
-                        <ul class="ticks">
-                            <li>LangChain orchestrates document loaders, retrievers and the model; Flan-T5 from Hugging Face handles the language.</li>
-                            <li>PDF and text parsing for notes and quizzes, with real-time, context-aware Q&amp;A.</li>
-                            <li>Deployed with an interactive Streamlit front end.</li>
-                        </ul>
-                        <p class="stack">LangChain, Flan-T5, Hugging Face, Streamlit</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/NoteNinja-AI" target="_blank" rel="noopener">Repository</a></p>
-                        <p class="note">The public repository is being rebuilt, so some source files are temporarily unavailable.</p>
-                    </div>
-                </article>
+            <article class="pcard card" style="--n:3">
+                <div class="pcard-copy">
+                    <h3 class="h3">LDA resume screening dashboard</h3>
+                    <p>Published at ICCCAI-2024. Topic modeling that matches resumes to roles, over 80% accurate in simulated screenings.</p>
+                    <ul class="chips"><li>LDA</li><li>Scikit-learn</li><li>OpenAI API</li><li>Streamlit</li></ul>
+                    <p class="links"><a class="link" href="https://github.com/Lingesh-S/lda-resume-screening-dashboard" target="_blank" rel="noopener">Source code</a></p>
+                </div>
+                <div class="pcard-demo"><div class="pv" data-preview="lda" data-ui></div></div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
 
-                <article class="px-panel" role="tabpanel" id="p-lda" aria-labelledby="tab-lda">
-                    <div class="pv" data-preview="lda" data-ui></div>
-                    <div class="px-text">
-                        <h3 class="h3">LDA resume screening dashboard</h3>
-                        <p>Research presented at ICCCAI-2024: topic modeling that shows what a resume is really about, matches it to a role and drafts the interview questions.</p>
-                        <ul class="ticks">
-                            <li>LDA with Scikit-learn extracts the dominant topics and keywords from each resume.</li>
-                            <li>A custom job-matching algorithm with token indexing reached over 80% accuracy in simulated screenings.</li>
-                            <li>The OpenAI API generates personalised interview questions for the recruiter.</li>
-                        </ul>
-                        <p class="stack">Python, LDA, Scikit-learn, NLP, OpenAI API, Streamlit</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/lda-resume-screening-dashboard" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
-
-                <article class="px-panel" role="tabpanel" id="p-agents" aria-labelledby="tab-agents">
+            <article class="pcard card" style="--n:4">
+                <div class="pcard-copy">
+                    <h3 class="h3">Multi-agent blog generator</h3>
+                    <p>Researcher, writer and editor agents in LangGraph that turn a topic into an edited blog post.</p>
+                    <ul class="chips"><li>LangGraph</li><li>FastAPI</li><li>Ollama</li><li>Docker</li></ul>
+                    <p class="links"><a class="link" href="https://github.com/Lingesh-S/multi-agent-blog-generator" target="_blank" rel="noopener">Source code</a></p>
+                </div>
+                <div class="pcard-demo">
                     <div class="pv pv-static" data-ui aria-label="Illustration of a blog generation run">
-                        <div class="pv-head"><b>Blog generator</b><span>LangGraph run · illustrative</span></div>
+                        <div class="pv-head"><b>Blog generator · LangGraph run</b><span>Illustrative</span></div>
                         <div class="ag">
                             <p class="ag-topic"><span>Topic</span> How retrieval-augmented generation reduces hallucinations</p>
                             <ol class="ag-lanes">
-                                <li class="ag-lane"><b>Researcher</b><span>Searches the web through Tavily, with a TTL cache, and collects sources.</span></li>
-                                <li class="ag-lane"><b>Writer</b><span>Drafts the post for the chosen audience, tone and length with Ollama or OpenAI.</span></li>
-                                <li class="ag-lane"><b>Editor</b><span>Reviews the draft and sends it back for another pass until it is ready.</span></li>
+                                <li class="ag-lane"><b>Researcher</b><span>Searches the web with a cached search tool and gathers sources.</span></li>
+                                <li class="ag-lane"><b>Writer</b><span>Drafts the post for the chosen audience, tone and length.</span></li>
+                                <li class="ag-lane"><b>Editor</b><span>Reviews the draft and sends it back until it is ready.</span></li>
                             </ol>
-                            <p class="ag-out"><span>Ships as</span> web dashboard · REST API · CLI · Docker · Prometheus metrics</p>
+                            <p class="ag-out"><span>Ships as</span> web dashboard · REST API · CLI · Docker</p>
                         </div>
                     </div>
-                    <div class="px-text">
-                        <h3 class="h3">Multi-agent blog generator</h3>
-                        <p>Researcher, Writer and Editor agents, coordinated with LangGraph, research a topic and turn it into an edited blog post.</p>
-                        <ul class="ticks">
-                            <li>Iterative editing loops with configurable audience, tone and length.</li>
-                            <li>Web search through DuckDuckGo, Serper or Tavily with a TTL cache; drafting with Ollama or OpenAI behind one provider interface.</li>
-                            <li>Comes with a web dashboard, a FastAPI REST API, a CLI, a Docker setup and optional Prometheus metrics.</li>
-                        </ul>
-                        <p class="stack">LangGraph, FastAPI, Ollama, OpenAI, Docker, Prometheus</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/multi-agent-blog-generator" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
+                </div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
 
-                <article class="px-panel" role="tabpanel" id="p-mcq" aria-labelledby="tab-mcq">
+            <article class="pcard card" style="--n:5">
+                <div class="pcard-copy">
+                    <h3 class="h3">MCQ generator, Mistral-7B + LoRA</h3>
+                    <p>Mistral-7B fine-tuned with LoRA to write multiple-choice questions from a paragraph, published on the Hugging Face Hub.</p>
+                    <ul class="chips"><li>LoRA</li><li>PEFT</li><li>bitsandbytes</li><li>Transformers</li></ul>
+                    <p class="links"><a class="link" href="https://github.com/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener">Source code</a> <a class="link" href="https://huggingface.co/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener">Model card</a></p>
+                </div>
+                <div class="pcard-demo">
                     <div class="pv pv-static" data-ui aria-label="Illustration of a generated multiple-choice question">
-                        <div class="pv-head"><b>mcq-mistral-lora</b><span>Inference notebook · illustrative</span></div>
+                        <div class="pv-head"><b>mcq-mistral-lora · inference</b><span>Illustrative</span></div>
                         <div class="mcq">
-                            <p class="mcq-in"><span>Paragraph</span>Photosynthesis takes place in the chloroplasts, where chlorophyll absorbs light energy and converts carbon dioxide and water into glucose and oxygen.</p>
+                            <p class="mcq-in"><span>Paragraph</span>Photosynthesis takes place in the chloroplasts, where chlorophyll absorbs light and converts carbon dioxide and water into glucose and oxygen.</p>
                             <p class="mcq-q">Where in the plant cell does photosynthesis take place?</p>
-                            <ol class="mcq-opts">
-                                <li>Mitochondria</li>
-                                <li class="is-right">Chloroplasts</li>
-                                <li>Nucleus</li>
-                                <li>Ribosomes</li>
-                            </ol>
-                            <dl class="mcq-cfg">
-                                <div><dt>Adapter</dt><dd>LoRA r = 8, alpha = 32</dd></div>
-                                <div><dt>Training</dt><dd>~500 examples, 3 epochs, 8-bit</dd></div>
-                            </dl>
+                            <ol class="mcq-opts"><li>Mitochondria</li><li class="is-right">Chloroplasts</li><li>Nucleus</li><li>Ribosomes</li></ol>
+                            <dl class="mcq-cfg"><div><dt>Adapter</dt><dd>LoRA r = 8, alpha = 32</dd></div><div><dt>Training</dt><dd>~500 examples, 3 epochs</dd></div></dl>
                         </div>
                     </div>
-                    <div class="px-text">
-                        <h3 class="h3">MCQ generator, Mistral-7B + LoRA</h3>
-                        <p>Mistral-7B-Instruct fine-tuned with LoRA adapters to write multiple-choice questions from academic paragraphs, published on the Hugging Face Hub.</p>
-                        <ul class="ticks">
-                            <li>LoRA fine-tuning (r = 8, alpha = 32) in 8-bit with bitsandbytes and PEFT.</li>
-                            <li>Trained on about 500 paragraph-to-question examples for 3 epochs.</li>
-                            <li>Inference notebook and model card published on the Hub.</li>
-                        </ul>
-                        <p class="stack">Mistral-7B, LoRA, PEFT, bitsandbytes, Transformers</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener">Source code</a> <a class="link" href="https://huggingface.co/Lingesh-S/mcq-mistral-lora" target="_blank" rel="noopener">Model card</a></p>
-                    </div>
-                </article>
+                </div>
+                <span class="pcard-shade" aria-hidden="true"></span>
+            </article>
+        </div>
 
-                <article class="px-panel" role="tabpanel" id="p-tamil" aria-labelledby="tab-tamil">
-                    <figure class="px-figure fig-wide">
-                        <img src="assets/img/tamil-palm-leaf.webp" width="1374" height="492" alt="Two palm leaves densely inscribed with Tamil script, each with two binding holes." loading="lazy" decoding="async">
-                        <figcaption>Palm-leaf manuscript of Tamil literature, U. V. Swaminatha Iyer Library, Chennai.</figcaption>
-                    </figure>
-                    <div class="px-text">
-                        <h3 class="h3">Fine-tuning LLMs for Tamil stories</h3>
-                        <p>A two-part experiment in teaching a small language model to write stories in Tamil: a full fine-tuning baseline, then a parameter-efficient LoRA run.</p>
-                        <ul class="ticks">
-                            <li>Baseline fine-tuning with the Hugging Face Trainer API.</li>
-                            <li>LoRA (PEFT) fine-tuning of distilgpt2 on a Tamil story dataset.</li>
-                            <li>Dataset preparation, tokenization and model saving in a Colab workflow.</li>
-                        </ul>
-                        <p class="stack">Transformers, LoRA, PEFT, Datasets</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/fine-tuning-llm" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
-
-                <article class="px-panel" role="tabpanel" id="p-lungai" aria-labelledby="tab-lungai">
-                    <figure class="px-figure fig-xray">
-                        <img src="assets/img/chest-xray.webp" width="1000" height="1144" alt="A normal frontal chest X-ray showing the lungs, heart and ribs." loading="lazy" decoding="async">
-                        <figcaption>A normal chest radiograph, front view: the kind of image LungAI classifies as Normal or Pneumonia.</figcaption>
-                    </figure>
-                    <div class="px-text">
-                        <h3 class="h3">LungAI chest X-ray classifier</h3>
-                        <p>A CNN that classifies chest X-rays as Normal or Pneumonia, with Grad-CAM maps that show which regions drove each prediction.</p>
-                        <ul class="ticks">
-                            <li>A custom CNN and transfer-learning variants trained with TensorFlow and Keras.</li>
-                            <li>Grad-CAM visualisations to explain each prediction.</li>
-                            <li>Evaluated with accuracy, precision, recall, F1 and confusion matrices; optional Streamlit app for live predictions.</li>
-                        </ul>
-                        <p class="stack">TensorFlow, Keras, OpenCV, Grad-CAM, Streamlit</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/xray-diagnosis-cnn" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
-
-                <article class="px-panel" role="tabpanel" id="p-carsales" aria-labelledby="tab-carsales">
-                    <div class="pv pv-static" data-ui aria-label="Illustration of a sales dashboard with sample data">
-                        <div class="pv-head"><b>Car sales dashboard</b><span>Power BI · sample data</span></div>
-                        <div class="cs">
-                            <dl class="cs-kpis">
-                                <div><dt>Total sales</dt><dd>₹ 48.6 cr</dd></div>
-                                <div><dt>Average price</dt><dd>₹ 7.9 L</dd></div>
-                                <div><dt>Units</dt><dd>615</dd></div>
-                            </dl>
-                            <p class="cs-title">Revenue by region, ₹ crore</p>
-                            <ul class="cs-bars">
-                                <li style="--v:16.2"><span>South</span><b>16.2</b></li>
-                                <li style="--v:12.9"><span>West</span><b>12.9</b></li>
-                                <li style="--v:11.4"><span>North</span><b>11.4</b></li>
-                                <li style="--v:8.1"><span>East</span><b>8.1</b></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="px-text">
-                        <h3 class="h3">Car sales analytics</h3>
-                        <p>An end-to-end analysis of car sales: cleaning and exploration in Python, KPI queries in SQL and interactive Power BI dashboards.</p>
-                        <ul class="ticks">
-                            <li>Data cleaning and exploratory analysis with Pandas and NumPy.</li>
-                            <li>SQL queries for KPIs such as total sales, average price and top dealers.</li>
-                            <li>Power BI dashboards for regional revenue, dealer performance and customer demographics.</li>
-                        </ul>
-                        <p class="stack">Python, SQL, Pandas, Power BI</p>
-                        <p class="links"><a class="link" href="https://github.com/Lingesh-S/car-sales-analytics" target="_blank" rel="noopener">Source code</a></p>
-                    </div>
-                </article>
-            </div>
+        <h3 class="h3 more-title" data-reveal>More projects</h3>
+        <div class="more">
+            <article class="mini card lit" data-reveal data-tilt>
+                <div class="mini-visual mini-code" aria-hidden="true">
+                    <span>model = <em>distilgpt2</em></span>
+                    <span>adapter = <em>LoRA (PEFT)</em></span>
+                    <span>data = <em>Tamil short stories</em></span>
+                </div>
+                <h4 class="h4">Fine-tuning LLMs for Tamil stories</h4>
+                <p>LoRA fine-tuning of distilgpt2 to write short stories in Tamil, against a full fine-tuning baseline.</p>
+                <a class="link" href="https://github.com/Lingesh-S/fine-tuning-llm" target="_blank" rel="noopener">Source code</a>
+            </article>
+            <article class="mini card lit" data-reveal data-tilt>
+                <div class="mini-visual mini-photo">
+                    <img src="assets/img/chest-xray.webp" width="1000" height="1144" alt="A frontal chest X-ray." loading="lazy" decoding="async">
+                </div>
+                <h4 class="h4">LungAI chest X-ray classifier</h4>
+                <p>A CNN that classifies chest X-rays as Normal or Pneumonia, with Grad-CAM to show why.</p>
+                <a class="link" href="https://github.com/Lingesh-S/xray-diagnosis-cnn" target="_blank" rel="noopener">Source code</a>
+            </article>
+            <article class="mini card lit" data-reveal data-tilt>
+                <div class="mini-visual mini-bars" aria-hidden="true">
+                    <span style="--v:.92"></span><span style="--v:.74"></span><span style="--v:.6"></span><span style="--v:.82"></span><span style="--v:.48"></span><span style="--v:.66"></span>
+                </div>
+                <h4 class="h4">Car sales analytics</h4>
+                <p>Cleaning and exploration in Python, KPI queries in SQL and interactive Power BI dashboards.</p>
+                <a class="link" href="https://github.com/Lingesh-S/car-sales-analytics" target="_blank" rel="noopener">Source code</a>
+            </article>
         </div>
     </div>
 </section>
 
 <!-- ============================== Experience ============================== -->
-<section class="experience" id="experience" aria-labelledby="experience-title">
+<section class="sheet experience" id="experience" aria-labelledby="experience-title">
     <div class="wrap">
-        <header class="section-head" data-reveal>
-            <h2 class="h2" id="experience-title">Experience</h2>
-            <p class="statement">From classical NLP to large language models to production ML, in three roles since June 2024.</p>
+        <header class="section-head">
+            <h2 class="h2" id="experience-title" data-split>Experience</h2>
+            <p class="lede" data-reveal>From classical NLP to LLMs to production ML, since June 2024.</p>
         </header>
-        <ol class="roles">
-            <li class="role" data-reveal>
-                <p class="role-when"><span>July 2025 – Present</span><span class="role-now">Current role</span></p>
-                <div class="role-who">
+        <ol class="timeline">
+            <li class="tl-item" data-reveal>
+                <span class="tl-node" aria-hidden="true"></span>
+                <div class="tl-card card lit" data-tilt>
+                    <p class="tl-when">July 2025 – Present <span class="badge badge-sm"><span class="live-dot" aria-hidden="true"></span>Current</span></p>
                     <h3 class="h3">Data Scientist</h3>
-                    <p>DataTracks</p>
+                    <p class="tl-org">DataTracks</p>
+                    <ul class="ticks">
+                        <li>Build and maintain the LSTM + NER models that auto-tag financial statements with XBRL concepts, and shipped two new taxonomy pipelines end to end.</li>
+                        <li>Built the RAG next-word prediction service for the product’s editor, served with FastAPI, RabbitMQ and Docker and monitored in Grafana.</li>
+                    </ul>
                 </div>
-                <ul class="ticks role-did">
-                    <li>Built and maintain LSTM + NER XBRL auto-tagging models for multiple region-specific taxonomies across the core compliance products.</li>
-                    <li>Designed independent ML pipelines per taxonomy, and trained and deployed two new taxonomy pipelines end to end, from data prep to production integration.</li>
-                    <li>Developed a RAG-based next-word prediction system for a Word-like editor in a flagship product with Haystack, FastAPI and RabbitMQ.</li>
-                    <li>Implemented production monitoring and observability for the ML services with Grafana and Prometheus.</li>
-                    <li>Deploy and manage ML services on on-premise infrastructure with Docker, FastAPI and REST APIs, for scalable serving and low-latency inference.</li>
-                </ul>
             </li>
-            <li class="role" data-reveal>
-                <p class="role-when"><span>Jan 2025 – June 2025</span><span class="role-now">Virtual internship</span></p>
-                <div class="role-who">
+            <li class="tl-item" data-reveal>
+                <span class="tl-node" aria-hidden="true"></span>
+                <div class="tl-card card lit" data-tilt>
+                    <p class="tl-when">Jan 2025 – June 2025</p>
                     <h3 class="h3">LLM Intern</h3>
-                    <p>Dtyle.AI, incubated at IIT Madras</p>
+                    <p class="tl-org">Dtyle.AI, incubated at IIT Madras</p>
+                    <ul class="ticks">
+                        <li>Prompt engineering, fine-tuning and evaluation of LLM systems, under the CTO’s mentorship.</li>
+                        <li>Built RAG question-answering prototypes with Flan-T5 and LangChain.</li>
+                    </ul>
                 </div>
-                <ul class="ticks role-did">
-                    <li>Worked on large language models and generative AI with the tech team, under the CTO’s mentorship.</li>
-                    <li>Contributed to prompt engineering, fine-tuning and evaluation of LLM-based systems.</li>
-                    <li>Researched and experimented with transformer models and applied them in practice.</li>
-                    <li>Developed RAG architectures with Flan-T5 and LangChain for modular, context-aware Q&amp;A applications.</li>
-                    <li>Kept data privacy and responsible AI practices in every project workflow.</li>
-                </ul>
             </li>
-            <li class="role" data-reveal>
-                <p class="role-when"><span>June 2024 – Dec 2024</span><span class="role-now">Internship</span></p>
-                <div class="role-who">
+            <li class="tl-item" data-reveal>
+                <span class="tl-node" aria-hidden="true"></span>
+                <div class="tl-card card lit" data-tilt>
+                    <p class="tl-when">June 2024 – Dec 2024</p>
                     <h3 class="h3">ML Intern</h3>
-                    <p>Cognibot Labs</p>
+                    <p class="tl-org">Cognibot Labs</p>
+                    <ul class="ticks">
+                        <li>End-to-end text analytics pipelines with Scikit-learn, NLTK and spaCy.</li>
+                        <li>LDA topic modeling with Gensim and TF-IDF to cluster large document sets.</li>
+                    </ul>
                 </div>
-                <ul class="ticks role-did">
-                    <li>Built end-to-end classical ML pipelines for text analytics with Scikit-learn: preprocessing, feature engineering, training and evaluation.</li>
-                    <li>Developed an LDA topic modeling system with Gensim and TF-IDF to extract latent topics from large text datasets and improve document clustering.</li>
-                    <li>Applied NLTK and spaCy for tokenization, lemmatization and stopword removal, and trained Logistic Regression, Naive Bayes and SVM models.</li>
-                    <li>Tuned and evaluated models with GridSearchCV and cross-validation, measured by accuracy, precision, recall and F1.</li>
-                </ul>
             </li>
         </ol>
     </div>
 </section>
 
 <!-- ============================== Skills ============================== -->
-<section class="skills" id="skills" aria-labelledby="skills-title">
+<section class="sheet skills" id="skills" aria-labelledby="skills-title">
     <div class="wrap">
-        <header class="section-head" data-reveal>
-            <h2 class="h2" id="skills-title">Skills, as a taxonomy</h2>
-            <p class="statement">Every tool here is tagged with the work it was used in.</p>
+        <header class="section-head">
+            <h2 class="h2" id="skills-title" data-split>Skills</h2>
+            <p class="lede" data-reveal>The tools I reach for, grouped by the job they do.</p>
         </header>
-        <div class="tax-tree">
-            <section class="branch branch-wide" aria-labelledby="b-genai" data-reveal>
-                <h3 class="h3" id="b-genai">GenAI and RAG</h3>
-                <dl class="leaves">
-                    <div><dt>RAG systems</dt><dd>DataTracks, Dtyle.AI, Bedrock assistant, Codebase assistant, NoteNinja</dd></div>
-                    <div><dt>LLMs</dt><dd>Dtyle.AI, Bedrock assistant, Codebase assistant, NoteNinja, blog agents, MCQ generator, Tamil stories, resume screening</dd></div>
-                    <div><dt>LangChain</dt><dd>Dtyle.AI, Bedrock assistant, Codebase assistant, NoteNinja</dd></div>
-                    <div><dt>LangGraph</dt><dd>Blog agents</dd></div>
-                    <div><dt>Haystack</dt><dd>Next-word prediction at DataTracks</dd></div>
-                    <div><dt>Prompt engineering</dt><dd>Dtyle.AI</dd></div>
-                    <div><dt>Fine-tuning, LoRA, PEFT</dt><dd>Dtyle.AI, MCQ generator, Tamil stories</dd></div>
-                    <div><dt>Hugging Face</dt><dd>NoteNinja, MCQ generator, Tamil stories</dd></div>
-                    <div><dt>SentenceTransformers</dt><dd>Codebase assistant</dd></div>
-                    <div><dt>ChromaDB and FAISS</dt><dd>Bedrock assistant, Codebase assistant</dd></div>
-                    <div><dt>AWS Bedrock</dt><dd>Bedrock assistant, with Titan LLM and Titan Embeddings</dd></div>
-                </dl>
+        <div class="bento">
+            <section class="tile card lit tile-wide" aria-labelledby="sk-genai" data-reveal data-tilt>
+                <h3 class="h4" id="sk-genai">GenAI and LLMs</h3>
+                <ul class="chips chips-lg"><li>RAG</li><li>LangChain</li><li>LangGraph</li><li>Haystack</li><li>Hugging Face</li><li>LoRA and PEFT</li><li>Prompt engineering</li><li>AWS Bedrock</li><li>ChromaDB</li><li>FAISS</li></ul>
             </section>
-            <section class="branch" aria-labelledby="b-prod" data-reveal>
-                <h3 class="h3" id="b-prod">Production ML</h3>
-                <dl class="leaves">
-                    <div><dt>LSTM</dt><dd>XBRL auto-tagging at DataTracks</dd></div>
-                    <div><dt>NER</dt><dd>XBRL auto-tagging at DataTracks</dd></div>
-                    <div><dt>XBRL taxonomies</dt><dd>Region-specific pipelines at DataTracks</dd></div>
-                </dl>
+            <section class="tile card lit" aria-labelledby="sk-ml" data-reveal data-tilt>
+                <h3 class="h4" id="sk-ml">Machine learning</h3>
+                <ul class="chips chips-lg"><li>LSTM</li><li>NER</li><li>Transformers</li><li>PyTorch</li><li>TensorFlow</li><li>Scikit-learn</li></ul>
             </section>
-            <section class="branch" aria-labelledby="b-serve" data-reveal>
-                <h3 class="h3" id="b-serve">Serving and cloud</h3>
-                <dl class="leaves">
-                    <div><dt>FastAPI and REST APIs</dt><dd>XBRL engine, next-word prediction, blog agents</dd></div>
-                    <div><dt>Docker</dt><dd>XBRL engine, next-word prediction, blog agents</dd></div>
-                    <div><dt>RabbitMQ</dt><dd>Next-word prediction</dd></div>
-                    <div><dt>Grafana and Prometheus</dt><dd>XBRL engine, next-word prediction, blog agents</dd></div>
-                    <div><dt>AWS</dt><dd>S3, SageMaker, Lambda, EC2, Glue, Athena</dd></div>
-                    <div><dt>PySpark and Kafka</dt><dd>Batch and streaming data processing</dd></div>
-                </dl>
+            <section class="tile card lit" aria-labelledby="sk-ops" data-reveal data-tilt>
+                <h3 class="h4" id="sk-ops">Serving and cloud</h3>
+                <ul class="chips chips-lg"><li>FastAPI</li><li>Docker</li><li>RabbitMQ</li><li>Grafana</li><li>Prometheus</li><li>AWS</li></ul>
             </section>
-            <section class="branch" aria-labelledby="b-nlp" data-reveal>
-                <h3 class="h3" id="b-nlp">NLP and research</h3>
-                <dl class="leaves">
-                    <div><dt>Transformers</dt><dd>Dtyle.AI, Codebase assistant, NoteNinja, MCQ generator, Tamil stories</dd></div>
-                    <div><dt>LDA, Gensim, TF-IDF</dt><dd>Cognibot Labs, resume screening, ICCCAI-2024 paper</dd></div>
-                    <div><dt>NLTK and spaCy</dt><dd>Cognibot Labs</dd></div>
-                </dl>
+            <section class="tile card lit tile-wide" aria-labelledby="sk-data" data-reveal data-tilt>
+                <h3 class="h4" id="sk-data">Data and NLP</h3>
+                <ul class="chips chips-lg"><li>Python</li><li>SQL</li><li>Pandas</li><li>NumPy</li><li>NLTK</li><li>spaCy</li><li>PySpark</li><li>Kafka</li><li>Streamlit</li><li>Power BI</li></ul>
             </section>
-            <section class="branch" aria-labelledby="b-found" data-reveal>
-                <h3 class="h3" id="b-found">ML foundations</h3>
-                <dl class="leaves">
-                    <div><dt>Python and SQL</dt><dd>Behind every pipeline, model and service here</dd></div>
-                    <div><dt>PyTorch</dt><dd>Codebase assistant, MCQ generator</dd></div>
-                    <div><dt>TensorFlow and Keras</dt><dd>LungAI</dd></div>
-                    <div><dt>Scikit-learn</dt><dd>Cognibot Labs, resume screening</dd></div>
-                    <div><dt>Pandas and NumPy</dt><dd>Cognibot Labs, LungAI, car sales analytics</dd></div>
-                    <div><dt>Streamlit</dt><dd>Bedrock assistant, Codebase assistant, NoteNinja, resume screening, LungAI</dd></div>
-                </dl>
-            </section>
+        </div>
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-row"><span>XBRL</span><span>RAG</span><span>LSTM + NER</span><span>LangChain</span><span>Mistral-7B</span><span>LoRA</span><span>FastAPI</span><span>Docker</span><span>Haystack</span><span>Bedrock</span><span>Grafana</span><span>Flan-T5</span></div>
         </div>
     </div>
 </section>
 
 <!-- ============================== Research & education ============================== -->
-<section class="research" id="research" aria-labelledby="research-title">
+<section class="sheet research" id="research" aria-labelledby="research-title">
     <div class="wrap">
-        <h2 class="h2" id="research-title" data-reveal>Research and education</h2>
+        <header class="section-head">
+            <h2 class="h2" id="research-title" data-split>Research and education</h2>
+        </header>
         <div class="rs-grid">
-            <article class="paper" data-reveal>
-                <h3 class="h3">Published research</h3>
-                <p class="paper-title">“LDA-Powered Resume Screening Dashboard with Token Indexing &amp; Streamlit”</p>
-                <p>Published and presented at ICCCAI-2024, in association with Taylor’s University, Malaysia. The dashboard surfaces each resume’s dominant topics with LDA, scores it against a role and drafts interview questions.</p>
-                <div class="paper-fig">
-                    <p class="fig-n fig-n-mid">80%+</p>
-                    <p><span class="fact-tag">lingesh:<wbr>Match<wbr>Accuracy</span><span class="fig-text">Job-matching accuracy in simulated resume screenings.</span></p>
-                </div>
-                <p class="links"><a class="link" href="#p-lda" data-open-project="lda">See the dashboard</a> <a class="link" href="https://github.com/Lingesh-S/lda-resume-screening-dashboard" target="_blank" rel="noopener">Source code</a></p>
+            <article class="paper card lit" data-reveal data-tilt>
+                <p class="badge">Published · ICCCAI-2024</p>
+                <h3 class="h3">LDA-Powered Resume Screening Dashboard with Token Indexing &amp; Streamlit</h3>
+                <p class="paper-venue">Presented at ICCCAI-2024, in association with Taylor’s University, Malaysia.</p>
+                <div class="big-stat"><span class="big-n">80%+</span><span>match accuracy in simulated screenings</span></div>
+                <p class="links"><a class="link" href="https://github.com/Lingesh-S/lda-resume-screening-dashboard" target="_blank" rel="noopener">Source code</a></p>
             </article>
-
-            <article class="degree" data-reveal>
+            <article class="degree card lit" data-reveal data-tilt>
                 <figure class="degree-photo">
-                    <img src="assets/img/sathyabama.webp" width="1600" height="1199" alt="White domed buildings of Sathyabama University seen over trees under a blue sky." loading="lazy" decoding="async">
-                    <figcaption>Sathyabama University, Chennai.</figcaption>
+                    <img src="assets/img/sathyabama.webp" width="1600" height="1199" alt="Sathyabama University's white domed buildings under a blue sky." loading="lazy" decoding="async">
                 </figure>
-                <h3 class="h3">B.E. Computer Science Engineering</h3>
-                <p>Sathyabama University, Chennai. Full-time, 2020 to 2024.</p>
-                <div class="paper-fig">
-                    <p class="fig-n fig-n-mid">8.41</p>
-                    <p><span class="fact-tag">lingesh:<wbr>CGPA</span><span class="fig-text">Graduating CGPA, out of 10.</span></p>
+                <div class="degree-body">
+                    <h3 class="h3">B.E. Computer Science Engineering</h3>
+                    <p class="paper-venue">Sathyabama University, Chennai · 2020 – 2024</p>
+                    <div class="big-stat"><span class="big-n">8.41</span><span>CGPA out of 10</span></div>
                 </div>
             </article>
         </div>
-
-        <div class="certs" data-reveal>
-            <h3 class="h3">Certifications</h3>
-            <ul>
-                <li><b>Cloud Data Management Associate</b><span>Oracle</span></li>
-                <li><b>Data Analytics Virtual Experience</b><span>Accenture</span></li>
-                <li><b>Machine Learning Internship</b><span>Cognibot Labs</span></li>
-            </ul>
-        </div>
+        <ul class="certs" data-reveal>
+            <li class="card"><b>Cloud Data Management Associate</b><span>Oracle</span></li>
+            <li class="card"><b>Data Analytics Virtual Experience</b><span>Accenture</span></li>
+            <li class="card"><b>Machine Learning Internship</b><span>Cognibot Labs</span></li>
+        </ul>
     </div>
 </section>
 
 <!-- ============================== Contact ============================== -->
-<section class="contact" id="contact" aria-labelledby="contact-title">
+<section class="sheet contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap">
-        <h2 class="h2" id="contact-title" data-reveal>Hiring for ML or GenAI work?</h2>
-        <p class="statement" data-reveal>Email is the quickest way to reach me. My résumé has the full details.</p>
-        <a class="mail" href="mailto:lingeshsrinivasan1@gmail.com?subject=Hello%20Lingesh" data-reveal><span>lingeshsrinivasan1@gmail.com</span></a>
-        <ul class="contact-links" data-reveal>
-            <li><a href="tel:+917299307308"><b>Phone</b><span>+91 72993 07308</span></a></li>
-            <li><a href="https://www.linkedin.com/in/lingesh-s29" target="_blank" rel="noopener"><b>LinkedIn</b><span>lingesh-s29</span></a></li>
-            <li><a href="https://github.com/Lingesh-S" target="_blank" rel="noopener"><b>GitHub</b><span>Lingesh-S</span></a></li>
-            <li><a href="Lingesh_Resume.pdf" download><b>Résumé</b><span>PDF download</span></a></li>
-        </ul>
+        <div class="contact-card card lit" data-reveal>
+            <h2 class="h2" id="contact-title" data-split>Hiring for ML or GenAI work?</h2>
+            <p class="lede">Email is the quickest way to reach me. My résumé has the full details.</p>
+            <div class="mail-row">
+                <a class="mail" href="mailto:lingeshsrinivasan1@gmail.com?subject=Hello%20Lingesh">lingeshsrinivasan1@gmail.com</a>
+                <button class="btn btn-ghost btn-sm copy" type="button" data-copy="lingeshsrinivasan1@gmail.com"><span>Copy email</span></button>
+            </div>
+            <ul class="contact-links">
+                <li><a href="tel:+917299307308"><b>Phone</b><span>+91 72993 07308</span></a></li>
+                <li><a href="https://www.linkedin.com/in/lingesh-s29" target="_blank" rel="noopener"><b>LinkedIn</b><span>lingesh-s29</span></a></li>
+                <li><a href="https://github.com/Lingesh-S" target="_blank" rel="noopener"><b>GitHub</b><span>Lingesh-S</span></a></li>
+                <li><a href="Lingesh_Resume.pdf" download><b>Résumé</b><span>PDF download</span></a></li>
+            </ul>
+        </div>
     </div>
 </section>
 
@@ -697,10 +421,11 @@
         <p class="name fit foot-name" aria-hidden="true"><span class="fit-text">Lingesh S</span></p>
         <div class="foot-row">
             <p>© 2026 Lingesh S. Data scientist.</p>
-            <p class="credits">Pictures via Wikimedia Commons: ledger of the fur trader Dedo from Leipzig, 1876–1885, public domain · palm-leaf manuscript at the U. V. Swaminatha Iyer Library, photo by Ms Sarah Welch, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a> · normal PA chest radiograph by Mikael Häggström, CC0 · Sathyabama administration building, Sathyabama University, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</p>
+            <p class="credits">Photos via Wikimedia Commons: chest radiograph by Mikael Häggström, CC0 · Sathyabama administration building, Sathyabama University, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>.</p>
             <a class="link" href="#top">Back to top</a>
         </div>
     </div>
 </footer>
+<p class="sr-only" aria-live="polite" id="announce"></p>
 </body>
 </html>
