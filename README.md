@@ -40,7 +40,6 @@ This portfolio highlights my professional experience, projects, and technical sk
 
 Deployed on **Netlify** with continuous deployment from this repository.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR-SITE-ID/deploy-status)](https://app.netlify.com/sites/YOUR-SITE-NAME/deploys)
 
 ## 📧 Contact
 
